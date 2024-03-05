@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">XeApplication</string>
+    <string name="processing">Processing</string>
+
+    <string name="description_share_app">I\'m using the %s ! Try it now! %s</string>
+    <string name="description_share_app_link" translatable="false">https:\/\/play.google.com\/store\/apps\/details?id=%s</string>
+</resources>
