@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "652234469966",
+    "project_id": "xeapp-2a308",
+    "storage_bucket": "xeapp-2a308.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652234469966:android:c865df3fec8fd71afd891f",
+        "android_client_info": {
+          "package_name": "com.dss.xeapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-x9uWnfAcDtQ6Jo76lprTNxdo_ZSlVeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

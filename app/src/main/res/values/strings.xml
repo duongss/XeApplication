@@ -4,4 +4,10 @@
 
     <string name="description_share_app">I\'m using the %s ! Try it now! %s</string>
     <string name="description_share_app_link" translatable="false">https:\/\/play.google.com\/store\/apps\/details?id=%s</string>
+    <string name="upgrade_to_the_newest_version">Nâng cấp lên phiên bản mới nhất</string>
+    <string name="description_update_version">Cửa hàng Google có phiên bản mới nhất với các tính năng mới hấp dẫn.</string>
+    <string name="upgrade">Nâng cấp</string>
+    <string name="title_later">Lúc khác</string>
+    <string name="home">Trang chủ</string>
+    <string name="setting">Cài đặt</string>
 </resources>
