@@ -1,9 +1,9 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id ("com.android.application")
+    id ("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
-    id("com.google.gms.google-services")
+    id ("com.google.gms.google-services")
 }
 
 android {
@@ -53,9 +53,10 @@ dependencies {
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
     implementation ("com.google.firebase:firebase-core:21.1.1")
-    implementation ("com.google.firebase:firebase-config-ktx")
     implementation ("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation ("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     //in-app-update
     implementation ("com.google.android.play:app-update-ktx:2.1.0")
     implementation ("com.google.android.play:app-update:2.1.0")
@@ -72,4 +73,5 @@ dependencies {
     implementation ("com.makeramen:roundedimageview:2.3.0")
     implementation ("com.airbnb.android:lottie:5.2.0")
     implementation ("com.guolindev.permissionx:permissionx:1.7.1")
+    implementation ("com.google.code.gson:gson:2.10.1")
 }

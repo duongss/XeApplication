@@ -9,6 +9,7 @@ import com.dss.xeapplication.base.ads.GoogleMobileAdsConsentManager
 import com.dss.xeapplication.base.network.INetworkManager
 import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import com.dss.xeapplication.base.local.bus.Event
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 import org.greenrobot.eventbus.EventBus
 import java.util.Locale
@@ -43,6 +44,7 @@ class App : Application(), INetworkManager {
         super.onCreate()
         app = this
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        FirebaseApp.initializeApp(this)
 
 
         locale = Locale(SharedPref.getLanguage().toString())

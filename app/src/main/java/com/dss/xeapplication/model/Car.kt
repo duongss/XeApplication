@@ -6,7 +6,6 @@ import com.dss.xeapplication.R
 data class Car(
     var id : String,
     var name : String, // tên xe
-    var sortName : String, // biệt danh xe
     val brand: String, // hãng
     val model: String, // kiểu
     val year: Int, // năm sản xuất

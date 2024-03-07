@@ -1,6 +1,5 @@
 package com.dss.xeapplication.base.extension
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ContentResolver
@@ -26,7 +25,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
-import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseActivity
 import java.io.File
 
@@ -187,3 +185,19 @@ fun Context.gotoWebsite(link: String) {
 
 fun Fragment.toastMsg(msg: Int) =
     Toast.makeText(requireActivity(), this.getString(msg), Toast.LENGTH_SHORT).show()
+
+fun Context.internalFile(): File {
+    return File(this.filesDir.absolutePath).apply {
+        if (!exists()) mkdir()
+    }
+}
+
+fun File.createDir(): File {
+    if (!exists()) {
+        mkdirs()
+    } else if (!isDirectory && canWrite()) {
+        delete()
+        mkdirs()
+    }
+    return this
+}

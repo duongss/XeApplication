@@ -9,6 +9,7 @@ import com.dss.xeapplication.MainActivity
 import com.dss.xeapplication.base.BaseActivity
 import com.dss.xeapplication.base.ads.GoogleMobileAdsConsentManager
 import com.dss.xeapplication.base.network.NetworkHelper
+import com.dss.xeapplication.data.FirebaseStorage
 import com.dss.xeapplication.databinding.ActivityLaunchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -91,6 +92,10 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        FirebaseStorage.initData {
+
+        }
+
         googleMobileAdsConsentManager.gatherConsent(this) { consentError ->
             isGather = true
             if (consentError != null) {
@@ -117,7 +122,7 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
     private fun nextSplash() {
         isSplashDone = true
         runOnUiThread {
-//            startActivity(MainActivity.newIntent(this@SplashJoinActivity))
+            startActivity(MainActivity.newIntent(this@SplashJoinActivity))
             finish()
         }
     }
