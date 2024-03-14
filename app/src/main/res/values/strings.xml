@@ -10,4 +10,8 @@
     <string name="title_later">Lúc khác</string>
     <string name="home">Trang chủ</string>
     <string name="setting">Cài đặt</string>
+    <string name="nation">Quốc gia</string>
+    <string name="search_hint">Tìm kiếm tên hãng,loại xe</string>
+    <string name="hang_xe">Hãng xe</string>
+    <string name="more">Xem thêm</string>
 </resources>

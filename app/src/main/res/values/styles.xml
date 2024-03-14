@@ -8,6 +8,23 @@
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingRight">4dp</item>
     </style>
+
+    <style name="TextFeature2">
+        <item name="android:textColor">@color/color8</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextFeature3">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/svn_diablo</item>
+    </style>
+
+    <style name="TextFeature4">
+        <item name="android:textColor">@color/color2</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
         <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>
     </style>
