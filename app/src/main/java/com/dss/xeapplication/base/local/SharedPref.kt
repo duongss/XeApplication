@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import com.dss.xeapplication.App
+import com.dss.xeapplication.base.extension.getString
 import com.dss.xeapplication.base.extension.setBoolean
 import com.dss.xeapplication.base.extension.setInt
 import com.dss.xeapplication.base.extension.setLong
+import com.dss.xeapplication.base.extension.setString
+import com.dss.xeapplication.model.Sorter
+import com.google.gson.Gson
 import java.util.Locale
 
 
@@ -272,47 +276,6 @@ object SharedPref {
             editor.putLong(MAX_TIME_GAP_KEY, value).apply()
         }
 
-    var monetization: Boolean
-        get() = getSharedPreferences().getBoolean(MONETIZATION_KEY, false)
-        set(value) {
-            editor.putBoolean(MONETIZATION_KEY, value).apply()
-        }
-
-     var ignoreGapThresold: Int
-        get() = getSharedPreferences().getInt(IGNORE_GAP_TIME_RELOAD_NUMBER, 2)
-        set(value) {
-            editor.putInt(IGNORE_GAP_TIME_RELOAD_NUMBER, value).apply()
-        }
-    var numberNativeNeedLoad: Int
-        get() = getSharedPreferences().getInt(NUMBER_NATIVE_NEED_LOAD_KEY, 2)
-        set(value) {
-            editor.putInt(NUMBER_NATIVE_NEED_LOAD_KEY, value).apply()
-        }
-
-    var isFirstTimeOrc: Boolean
-        get() = getSharedPreferences().getBoolean(FIRST_TIME_ORC_EXTRACT_LANGUAGE, true)
-        set(value) {
-            getSharedPreferences().setBoolean(FIRST_TIME_ORC_EXTRACT_LANGUAGE, value)
-        }
-
-    var isFirstTimeImportPhoto: Boolean
-        get() = getSharedPreferences().getBoolean(FIRST_TIME_IMPORT_PHOTO, true)
-        set(value) {
-            getSharedPreferences().setBoolean(FIRST_TIME_IMPORT_PHOTO, value)
-        }
-
-
-    fun getViewFileCount(): Long {
-        return getSharedPreferences().getLong(VIEW_FILE_COUNT, 0)
-    }
-
-    fun setViewFileCount() {
-        val count = getSharedPreferences().getLong(VIEW_FILE_COUNT, 0)
-        val editor = getSharedPreferences().edit()
-        editor.putLong(VIEW_FILE_COUNT, count + 1L)
-        editor.apply()
-    }
-
     fun resetViewFileCount() {
         getSharedPreferences().setLong(VIEW_FILE_COUNT, 0)
     }
@@ -327,5 +290,14 @@ object SharedPref {
         get() = getSharedPreferences().getBoolean(FILE_CONVERT_NEW, false)
         set(value) {
             getSharedPreferences().setBoolean(FILE_CONVERT_NEW, value)
+        }
+
+    var sorterLocal: Sorter
+        get() = Gson().fromJson(
+            getSharedPreferences().getString(FILTER_SHARE_KEY), Sorter::class.java
+        ) ?: Sorter()
+        set(value) {
+            val json = Gson().toJson(value)
+            getSharedPreferences().setString(FILTER_SHARE_KEY, json)
         }
 }

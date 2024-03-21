@@ -14,4 +14,7 @@
     <string name="search_hint">Tìm kiếm tên hãng,loại xe</string>
     <string name="hang_xe">Hãng xe</string>
     <string name="more">Xem thêm</string>
+    <string name="danh_sach_xe">Danh sách</string>
+    <string name="viet_nam">Việt Nam</string>
+    <string name="model" translatable="false">Model</string>
 </resources>

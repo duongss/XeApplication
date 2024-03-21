@@ -11,7 +11,7 @@ import com.dss.xeapplication.base.ViewPagerAdapter
 import com.dss.xeapplication.base.extension.showChildDialog
 import com.dss.xeapplication.databinding.FragmentMainBinding
 import com.dss.xeapplication.feature.diaglog.UpgradeVersionDialog
-import com.dss.xeapplication.feature.main.page.HomeFragment
+import com.dss.xeapplication.feature.main.page.home.HomeFragment
 import com.dss.xeapplication.feature.main.viewmodel.MainViewModel
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory

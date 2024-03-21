@@ -92,8 +92,10 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
-        FirebaseStorage.initData {
+        if (NetworkHelper.isConnected()){
+            FirebaseStorage.initData {
 
+            }
         }
 
         googleMobileAdsConsentManager.gatherConsent(this) { consentError ->

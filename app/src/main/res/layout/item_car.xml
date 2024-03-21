@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:background="?selectableItemBackground"
+    android:paddingStart="8dp"
+    android:paddingEnd="16dp">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/ivCar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNumberChair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvName"
+        app:riv_corner_radius="10dp" />
+
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/TextFeature1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivCar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Import Images" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/TextFeature1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/color8"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        tools:text="Import Images" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNumberChair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:drawablePadding="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/color8"
+        android:textSize="13sp"
+        app:drawableStartCompat="@drawable/chair_number"
+        app:layout_constraintBottom_toBottomOf="@+id/ivCar"
+        app:layout_constraintEnd_toEndOf="@+id/tvPrice"
+        app:layout_constraintStart_toStartOf="@+id/tvPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+        tools:text="Import Images" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
