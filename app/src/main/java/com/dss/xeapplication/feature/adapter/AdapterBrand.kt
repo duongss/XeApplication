@@ -24,8 +24,6 @@ class AdapterBrand :
         context: Context
     ) {
         Glide.with(context).load(data.image).into(binding.ivBrand)
-        binding.tvBrandName.text = buildString {
-            append(data.name)
-        }
+        binding.tvBrandName.text = context.getString(data.name)
     }
 }

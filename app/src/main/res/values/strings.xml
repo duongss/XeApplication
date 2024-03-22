@@ -17,4 +17,11 @@
     <string name="danh_sach_xe">Danh sách</string>
     <string name="viet_nam">Việt Nam</string>
     <string name="model" translatable="false">Model</string>
+    <string name="mitsubishi">Mitsubishi</string>
+    <string name="toyota">Toyota</string>
+    <string name="honda">Toyota</string>
+    <string name="toyota">Toyota</string>
+    <string name="toyota">Toyota</string>
+    <string name="toyota">Toyota</string>
+    <string name="all">Tất cả</string>
 </resources>

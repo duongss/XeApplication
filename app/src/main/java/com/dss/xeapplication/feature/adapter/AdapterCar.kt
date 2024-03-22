@@ -29,5 +29,6 @@ class AdapterCar :
         }
         binding.tvPrice.text = data.currentPrice
         binding.tvNumberChair.text = data.numOfSeats.toString()
+        binding.tvBrand.text = data.brand
     }
 }

@@ -60,9 +60,26 @@
         android:textSize="13sp"
         app:drawableStartCompat="@drawable/chair_number"
         app:layout_constraintBottom_toBottomOf="@+id/ivCar"
-        app:layout_constraintEnd_toEndOf="@+id/tvPrice"
+        app:layout_constraintEnd_toStartOf="@+id/tvBrand"
         app:layout_constraintStart_toStartOf="@+id/tvPrice"
         app:layout_constraintTop_toBottomOf="@+id/tvPrice"
-        tools:text="Import Images" />
+        tools:text="5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBrand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/color8"
+        android:textSize="13sp"
+        app:drawableStartCompat="@drawable/chair_number"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNumberChair"
+        app:layout_constraintEnd_toEndOf="@+id/tvPrice"
+        app:layout_constraintStart_toEndOf="@+id/tvNumberChair"
+        app:layout_constraintTop_toTopOf="@+id/tvNumberChair"
+        tools:text="Honda" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
