@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+            app:srcCompat="@drawable/ic_back" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/appCompatImageView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_main"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="12dp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/TextFeature1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+            tools:text="Tên xe" />
+
+        <TextView
+            android:id="@+id/tvBrand"
+            style="@style/TextFeature2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="Hang xe" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBookMark"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatImageView2"
+            app:layout_constraintTop_toTopOf="@+id/tvName"
+            app:srcCompat="@drawable/ic_bookmark"
+            tools:tint="@color/black" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieGear"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="14dp"
+            android:background="?selectableItemBackground"
+            android:scaleType="center"
+            app:layout_constraintStart_toStartOf="@+id/tvBrand"
+            app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lottieGear" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

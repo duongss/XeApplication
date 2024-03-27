@@ -5,21 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="2dp"
-    android:background="?selectableItemBackground"
-    android:paddingStart="8dp"
-    android:paddingEnd="16dp">
+    android:background="?selectableItemBackground">
 
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/ivCar"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvNumberChair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvName"
         app:riv_corner_radius="10dp" />
 
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBookMark"
+        android:layout_width="40dp"
+        android:padding="6dp"
+        android:layout_marginEnd="@dimen/margin_main"
+        android:background="?selectableItemBackground"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bookmark"
+        tools:tint="@color/black" />
 
     <TextView
         android:id="@+id/tvName"
@@ -28,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivBookMark"
         app:layout_constraintStart_toEndOf="@+id/ivCar"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Import Images" />
@@ -68,14 +78,14 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvBrand"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:drawablePadding="5dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="@color/color8"
         android:textSize="13sp"
-        app:drawableStartCompat="@drawable/chair_number"
+        app:drawableStartCompat="@drawable/ic_engineering"
         app:layout_constraintBottom_toBottomOf="@+id/tvNumberChair"
         app:layout_constraintEnd_toEndOf="@+id/tvPrice"
         app:layout_constraintStart_toEndOf="@+id/tvNumberChair"

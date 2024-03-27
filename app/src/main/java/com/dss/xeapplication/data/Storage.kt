@@ -1,9 +1,17 @@
 package com.dss.xeapplication.data
 
+import android.util.Log
 import com.dss.xeapplication.App
 import com.dss.xeapplication.base.extension.internalFile
-import com.dss.xeapplication.data.BrandProvider.HONDA
-import com.dss.xeapplication.data.BrandProvider.MITSUBISHI
+import com.dss.xeapplication.model.BrandProvider.ALL
+import com.dss.xeapplication.model.BrandProvider.FORD
+import com.dss.xeapplication.model.BrandProvider.HONDA
+import com.dss.xeapplication.model.BrandProvider.HUYNDAI
+import com.dss.xeapplication.model.BrandProvider.KIA
+import com.dss.xeapplication.model.BrandProvider.MAZDA
+import com.dss.xeapplication.model.BrandProvider.MITSUBISHI
+import com.dss.xeapplication.model.BrandProvider.TOYOTA
+import com.dss.xeapplication.model.BrandProvider.VINFAST
 import com.dss.xeapplication.model.Car
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
@@ -21,8 +29,8 @@ object FirebaseStorage {
 
     const val TAG = "FirebaseStorage"
 
+    var markList = arrayListOf<Car>()
     var listCar = arrayListOf<Car>()
-    var listBrand = listOf<String>()
 
     fun initData(result: (Boolean) -> Unit) {
 
@@ -48,18 +56,38 @@ object FirebaseStorage {
                 listCar = ArrayList(cars)
 
                 listCar.forEach {
+                    ALL.listCar.add(it)
+
                     when(it.brand.lowercase(Locale.ROOT)){
-                        context.getString(MITSUBISHI.name).lowercase(Locale.ROOT) ->{
+                        MITSUBISHI.name.name.lowercase(Locale.ROOT) ->{
                             MITSUBISHI.listCar.add(it)
                         }
-                        context.getString(HONDA.name).lowercase(Locale.ROOT) ->{
+                        HONDA.name.name.lowercase(Locale.ROOT) ->{
                             HONDA.listCar.add(it)
+                        }
+                        TOYOTA.name.name.lowercase(Locale.ROOT) ->{
+                            TOYOTA.listCar.add(it)
+                        }
+                        MAZDA.name.name.lowercase(Locale.ROOT) ->{
+                            MAZDA.listCar.add(it)
+                        }
+                        KIA.name.name.lowercase(Locale.ROOT) ->{
+                            KIA.listCar.add(it)
+                        }
+                        VINFAST.name.name.lowercase(Locale.ROOT) ->{
+                            VINFAST.listCar.add(it)
+                        }
+                        HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
+                            HUYNDAI.listCar.add(it)
+                        }
+                        HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
+                            HUYNDAI.listCar.add(it)
                         }
                     }
                 }
 
-                listBrand = listCar.map { it.brand }.distinct()
 
+                loadMarkFolder()
                 withContext(Dispatchers.Main){
                     result(true)
                 }
@@ -67,6 +95,20 @@ object FirebaseStorage {
 
         }.addOnFailureListener {
             result(false)
+        }
+    }
+
+    private suspend fun loadMarkFolder() = withContext(Dispatchers.IO) {
+        val list = ArrayList(App.instance().appDao.getMark())
+        markList.clear()
+
+        list.forEach { l ->
+            listCar.forEach {
+                if (it.id == l.id) {
+                    it.isMark = true
+                    markList.add(it)
+                }
+            }
         }
     }
 }

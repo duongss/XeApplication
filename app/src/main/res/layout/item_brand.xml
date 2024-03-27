@@ -4,27 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_size_item_brand"
     android:layout_height="@dimen/_size_item_brand"
-    android:layout_marginStart="14dp"
+    android:layout_margin="8dp"
     android:orientation="vertical"
-    android:layout_marginVertical="8dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg_border_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:visibility="invisible"
+            android:id="@+id/ivSelected"
+            android:layout_margin="7dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            tools:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_radio_select" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivBrand"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="@dimen/size_brand"
+            android:layout_height="@dimen/size_brand"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_all"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             style="@style/TextFeature1"
+            android:layout_margin="4dp"
             android:id="@+id/tvBrandName"
+            app:layout_constraintTop_toBottomOf="@+id/ivBrand"
             tools:text="Mitusubishi"
-            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textColor="@color/color2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"/>

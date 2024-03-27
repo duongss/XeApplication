@@ -1,5 +1,6 @@
 package com.dss.xeapplication.base.extension
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ContentResolver
@@ -25,6 +26,8 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
+import com.dss.xeapplication.BuildConfig
+import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseActivity
 import java.io.File
 
@@ -174,7 +177,26 @@ fun BaseActivity<*>.showDialog(dialogFragment: DialogFragment) {
 }
 
 
-
+fun Context.shareApp() {
+    try {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        val shareMessage = getString(
+            R.string.description_share_app,
+            getString(R.string.app_name),
+            getString(R.string.description_share_app_link, BuildConfig.APPLICATION_ID)
+        )
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+        startActivity(
+            Intent.createChooser(
+                shareIntent,
+                getString(R.string.app_name)
+            )
+        )
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
 
 fun Context.gotoWebsite(link: String) {
     val intent = Intent(Intent.ACTION_VIEW)

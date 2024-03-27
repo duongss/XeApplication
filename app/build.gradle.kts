@@ -66,6 +66,12 @@ dependencies {
     implementation("com.google.android.ump:user-messaging-platform:2.2.0")
     implementation("androidx.hilt:hilt-navigation-fragment:1.1.0")
     kapt("com.google.dagger:hilt-compiler:2.44")
+    //room
+    val room_version = "2.5.2"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
     //lib
     implementation ("org.greenrobot:eventbus:3.3.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
@@ -75,4 +81,5 @@ dependencies {
     implementation ("com.airbnb.android:lottie:5.2.0")
     implementation ("com.guolindev.permissionx:permissionx:1.7.1")
     implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("com.github.ome450901:SimpleRatingBar:1.5.1")
 }

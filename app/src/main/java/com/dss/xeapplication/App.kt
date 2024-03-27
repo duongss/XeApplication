@@ -9,6 +9,7 @@ import com.dss.xeapplication.base.ads.GoogleMobileAdsConsentManager
 import com.dss.xeapplication.base.network.INetworkManager
 import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import com.dss.xeapplication.base.local.bus.Event
+import com.dss.xeapplication.data.room.AppDao
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 import org.greenrobot.eventbus.EventBus
@@ -33,12 +34,10 @@ class App : Application(), INetworkManager {
         fun appContext(): Context = instance().applicationContext
     }
 
-    lateinit var locale: Locale
-
     @Inject
-    lateinit var googleMobileAdsConsentManager: GoogleMobileAdsConsentManager
+    lateinit var appDao: AppDao
 
-    fun acceptAds() = googleMobileAdsConsentManager.canRequestAds
+    lateinit var locale: Locale
 
     override fun onCreate() {
         super.onCreate()

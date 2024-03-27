@@ -21,4 +21,25 @@
     <string name="toyota">Toyota</string>
     <string name="honda">Toyota</string>
     <string name="all">Tất cả</string>
+    <string name="huyndai">Huyndai</string>
+    <string name="kia">Kia</string>
+    <string name="time">Thời gian</string>
+    <string name="price">Giá tiền</string>
+    <string name="name">Name</string>
+    <string name="from_oldest_to_newest">Từ cũ đến mới</string>
+    <string name="new_to_old">Từ mới đến cũ</string>
+    <string name="price_ex_to_cheap">Giá cao đến thấp</string>
+    <string name="price_cheap_to_ex">Giá thấp đến cao</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="sort">Sắp xếp</string>
+    <string name="rate_us">Đánh giá ứng dụng</string>
+    <string name="feedback_car">Gửi phản hồi</string>
+    <string name="share_app">Chia sẻ ứng dụng</string>
+    <string name="term_of_use">Điều khoản sử dụng</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="exit">Thoát</string>
+    <string name="danh_gia_ung_dung">Đánh giá ứng dụng</string>
+    <string name="we_are_trying_to_make_the_app_better">Chúng tôi sẽ cố gắng hoàn thiện hơn</string>
+    <string name="later">Lần sau</string>
+    <string name="rate">Đánh giá</string>
 </resources>

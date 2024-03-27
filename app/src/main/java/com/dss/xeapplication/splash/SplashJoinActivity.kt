@@ -36,15 +36,9 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
 
     private var isSplashDone = false
 
-    private var isGather: Boolean = false
-
-    @Inject
-    lateinit var googleMobileAdsConsentManager: GoogleMobileAdsConsentManager
-
     private val runnable = object : Runnable {
         override fun run() {
             if (isSplashDone) return
-            if (!isGather) return
 
             if (considerSkipSplash()) {
                 nextSplash()
@@ -68,9 +62,6 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
     private fun considerSkipSplash(): Boolean {
         if (loadDataDone) {
             if (!NetworkHelper.isConnected()) {
-                return true
-            }
-            if (isGather) {
                 return true
             }
         } else {
@@ -98,24 +89,6 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
             }
         }
 
-        googleMobileAdsConsentManager.gatherConsent(this) { consentError ->
-            isGather = true
-            if (consentError != null) {
-                Log.w("consentError", "${consentError.errorCode}: ${consentError.message}")
-            }
-
-            if (googleMobileAdsConsentManager.canRequestAds) {
-
-                googleMobileAdsConsentManager.initializeMobileAdsSdk(this)
-            } else {
-            }
-            handler = Handler(Looper.getMainLooper())
-            handler?.postDelayed(runnable, 0)
-        }
-
-        if (googleMobileAdsConsentManager.canRequestAds) {
-            googleMobileAdsConsentManager.initializeMobileAdsSdk(this)
-        }
 //        Glide.with(this).load("file:///android_asset/launcher_splash.png").into(binding.iconSplash)
 
     }

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/rlTime"
+        style="@style/RelativeLayoutStyle14"
+        android:background="?selectableItemBackground">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_time" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_toStartOf="@+id/ivCheckTime"
+            android:layout_toEndOf="@+id/ivTime"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/time"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivCheckTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ac_radio" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlName"
+        style="@style/RelativeLayoutStyle14"
+        android:background="?selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlTime">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_money" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_toStartOf="@+id/ivNameCheck"
+            android:layout_toEndOf="@+id/ivName"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/price"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivNameCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ac_radio" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.2"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/rlName" />
+
+    <FrameLayout
+        android:id="@+id/frGroup"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lnTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlOldtoNew"
+                style="@style/RelativeLayoutStyle14"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="?selectableItemBackground">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivOldtoNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_arrow_up" />
+
+                <TextView
+                    android:id="@+id/tvOldtoNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_toStartOf="@+id/ivOldtoNewCheck"
+                    android:layout_toEndOf="@+id/ivOldtoNew"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/from_oldest_to_newest"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/ivOldtoNewCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ac_radio" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlNewToOld"
+                style="@style/RelativeLayoutStyle14"
+                android:background="?selectableItemBackground"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivNewToOld"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_arrow_down" />
+
+                <TextView
+                    android:id="@+id/tvNewToOld"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_toStartOf="@+id/ivNewToOldCheck"
+                    android:layout_toEndOf="@+id/ivNewToOld"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/new_to_old"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/ivNewToOldCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ac_radio" />
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lnPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/rlPrice"
+                style="@style/RelativeLayoutStyle14"
+                android:background="?selectableItemBackground"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivAz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_arrow_up" />
+
+                <TextView
+                    android:id="@+id/tvAz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_toStartOf="@+id/ivAzCheck"
+                    android:layout_toEndOf="@+id/ivAz"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/price_cheap_to_ex"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/ivAzCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ac_radio" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlZa"
+                style="@style/RelativeLayoutStyle14"
+                android:background="?selectableItemBackground"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivZa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_arrow_down" />
+
+                <TextView
+                    android:id="@+id/tvZa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_toStartOf="@+id/ivZaCheck"
+                    android:layout_toEndOf="@+id/ivZa"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/price_ex_to_cheap"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/ivZaCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ac_radio" />
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/btnClose"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="16dp"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="14dp"
+        android:text="@string/cancel"
+        android:textSize="14sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frGroup" />
+
+    <TextView
+        android:id="@+id/btnNext"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="14dp"
+        android:text="@string/sort"
+        android:textColor="@color/color2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnClose"
+        app:layout_constraintTop_toTopOf="@+id/btnClose"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,7 @@
                     android:scaleType="center"
                     app:srcCompat="@drawable/ac_home" />
 
-                <com.dss.xeapplication.feature.custom.GradientTextView
+                <com.dss.xeapplication.ui.custom.GradientTextView
                     android:id="@+id/tvHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:layout_centerHorizontal="true"
                     app:srcCompat="@drawable/ac_tool" />
 
-                <com.dss.xeapplication.feature.custom.GradientTextView
+                <com.dss.xeapplication.ui.custom.GradientTextView
                     android:id="@+id/tvTool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

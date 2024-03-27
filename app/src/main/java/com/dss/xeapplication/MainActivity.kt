@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.dss.xeapplication.base.BaseActivity
 import com.dss.xeapplication.base.extension.replaceFragment
 import com.dss.xeapplication.databinding.ActivityMainBinding
-import com.dss.xeapplication.feature.main.MainFragment
+import com.dss.xeapplication.ui.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

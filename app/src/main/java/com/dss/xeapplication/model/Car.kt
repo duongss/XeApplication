@@ -1,6 +1,9 @@
 package com.dss.xeapplication.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Car(
     var id : Int = 0,// buộc điền
     var name : String, // tên xe
@@ -34,8 +37,11 @@ data class Car(
     var brake : String = "",// Phanh xe
     var airConditionType : String= "", // điều hòa
     var chairMaterial : String= "",
-    var imageCar :String =  ""
-) {
+    var imageCar :String =  "",
+
+    var isMark :Boolean = false,
+    var isSelected :Boolean = false
+) : Parcelable {
 
 }
 
