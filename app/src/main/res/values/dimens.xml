@@ -4,4 +4,6 @@
     <dimen name="margin_main">20dp</dimen>
     <dimen name="size_brand">60dp</dimen>
     <dimen name="grid_margin">4dp</dimen>
+    <dimen name="padding_detail_vertical">6dp</dimen>
+    <dimen name="padding_detail_hoz">12dp</dimen>
 </resources>

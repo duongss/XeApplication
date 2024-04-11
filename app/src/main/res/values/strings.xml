@@ -42,4 +42,25 @@
     <string name="we_are_trying_to_make_the_app_better">Chúng tôi sẽ cố gắng hoàn thiện hơn</string>
     <string name="later">Lần sau</string>
     <string name="rate">Đánh giá</string>
+    <string name="engineType">Loại động cơ</string>
+    <string name="transmissionType">Loại hộp số</string>
+    <string name="fuelType">Loại nhiên liệu</string>
+    <string name="numOfDoors">Số lượng cửa</string>
+    <string name="numOfSeats">Số ghế ngồi</string>
+    <string name="length">Chiều dài</string>
+    <string name="width">Chiều rộng</string>
+    <string name="height">Chiều cao</string>
+    <string name="undercarriageDistance">Khoảng cách gầm xe</string>
+    <string name="airBag">Số túi khí</string>
+    <string name="headlights">Loại Đèn pha</string>
+    <string name="HT">Hệ thống riêng của xe</string>
+    <string name="brake">Phanh xe</string>
+    <string name="airConditionType">Điều hòa</string>
+    <string name="chairMaterial">Chất liệu ghế</string>
+    <string name="BSW">Hệ thống cảnh báo điểm mù</string>
+    <string name="RCTA">Hệ thống cảnh báo phương tiện cắt ngang khi lùi xe</string>
+    <string name="LCDN">Hệ thống cảnh báo phương tiện phía trước khởi hành</string>
+    <string name="ABS">Hệ thống chống bó cứng phanh</string>
+    <string name="VRS">Cảm biến phía sau xe</string>
+    <string name="WPCS">Sạc không dây</string>
 </resources>

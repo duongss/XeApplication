@@ -56,33 +56,37 @@ object FirebaseStorage {
                 listCar = ArrayList(cars)
 
                 listCar.forEach {
-                    ALL.listCar.add(it)
+                    try {
+                        ALL.listCar.add(it)
 
-                    when(it.brand.lowercase(Locale.ROOT)){
-                        MITSUBISHI.name.name.lowercase(Locale.ROOT) ->{
-                            MITSUBISHI.listCar.add(it)
+                        when(it.brand.lowercase(Locale.ROOT)){
+                            MITSUBISHI.name.name.lowercase(Locale.ROOT) ->{
+                                MITSUBISHI.listCar.add(it)
+                            }
+                            HONDA.name.name.lowercase(Locale.ROOT) ->{
+                                HONDA.listCar.add(it)
+                            }
+                            TOYOTA.name.name.lowercase(Locale.ROOT) ->{
+                                TOYOTA.listCar.add(it)
+                            }
+                            MAZDA.name.name.lowercase(Locale.ROOT) ->{
+                                MAZDA.listCar.add(it)
+                            }
+                            KIA.name.name.lowercase(Locale.ROOT) ->{
+                                KIA.listCar.add(it)
+                            }
+                            VINFAST.name.name.lowercase(Locale.ROOT) ->{
+                                VINFAST.listCar.add(it)
+                            }
+                            HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
+                                HUYNDAI.listCar.add(it)
+                            }
+                            HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
+                                HUYNDAI.listCar.add(it)
+                            }
                         }
-                        HONDA.name.name.lowercase(Locale.ROOT) ->{
-                            HONDA.listCar.add(it)
-                        }
-                        TOYOTA.name.name.lowercase(Locale.ROOT) ->{
-                            TOYOTA.listCar.add(it)
-                        }
-                        MAZDA.name.name.lowercase(Locale.ROOT) ->{
-                            MAZDA.listCar.add(it)
-                        }
-                        KIA.name.name.lowercase(Locale.ROOT) ->{
-                            KIA.listCar.add(it)
-                        }
-                        VINFAST.name.name.lowercase(Locale.ROOT) ->{
-                            VINFAST.listCar.add(it)
-                        }
-                        HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
-                            HUYNDAI.listCar.add(it)
-                        }
-                        HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
-                            HUYNDAI.listCar.add(it)
-                        }
+                    }catch (e:Exception){
+
                     }
                 }
 

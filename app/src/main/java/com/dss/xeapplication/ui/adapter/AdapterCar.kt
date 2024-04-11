@@ -33,12 +33,7 @@ class AdapterCar(var onItemSelect: (Car, Int) -> Unit,var onItemMark: (Car, Int)
         binding.tvNumberChair.text = data.numOfSeats.toString()
         binding.tvBrand.text = data.brand
 
-        if (data.isMark){
-            binding.ivBookMark.setTint(R.color.color1)
-        }else{
-            binding.ivBookMark.setTint(R.color.black)
-        }
-
+        binding.ivBookMark.isActivated = data.isMark
         binding.root.onAvoidDoubleClick {
             onItemSelect(data,position)
         }

@@ -13,6 +13,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="10dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/tvNumberChair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvName"
@@ -28,8 +29,7 @@
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_bookmark"
-        tools:tint="@color/black" />
+        app:srcCompat="@drawable/ac_bookmark" />
 
     <TextView
         android:id="@+id/tvName"

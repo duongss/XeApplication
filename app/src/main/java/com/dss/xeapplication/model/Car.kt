@@ -1,6 +1,7 @@
 package com.dss.xeapplication.model
 
 import android.os.Parcelable
+import com.dss.xeapplication.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -21,10 +22,10 @@ data class Car(
     var length : Int = 0, // chiều dài
     var width : Int = 0, // chiều rộng
     var height : Int = 0, // chiều cao
-    var UndercarriageDistance : String = "", //Khoảng cách gầm xe
+    var undercarriageDistance  : Int =0, //Khoảng cách gầm xe
     var airBag : Int = 0, // số túi khí
     var tirePressureSensor : Boolean = false, // Cảm biến áp suất lốp
-    var automaticHeadlights  : String = "", // đèn pha tự động
+    var headlights : String = "", // đèn pha tự động
     var BSW : Boolean = false, // Hệ thống cảnh báo điểm mù
     var RCTA : Boolean = false, // Hệ thống cảnh báo phương tiện cắt ngang khi lùi xe
     var LCDN : Boolean = false, // Hệ thống cảnh báo phương tiện phía trước khởi hành
@@ -65,4 +66,32 @@ enum class VehicleType(val value: Int) {
 
 fun Car.getStrVehicleType(): String? {
     return VehicleType.getType(vehicleType)
+}
+
+fun Car.createListSpecifications(): ArrayList<SpecificationsCar> {
+    return  arrayListOf(
+        SpecificationsCar(R.string.engineType,engineType),
+        SpecificationsCar(R.string.transmissionType,transmissionType),
+        SpecificationsCar(R.string.fuelType,fuelType),
+        SpecificationsCar(R.string.headlights,headlights),
+        SpecificationsCar(R.string.HT,HT),
+        SpecificationsCar(R.string.brake,brake),
+        SpecificationsCar(R.string.airConditionType,airConditionType),
+        SpecificationsCar(R.string.chairMaterial,chairMaterial),
+
+        SpecificationsCar(R.string.numOfDoors, contentInt = numOfDoors, type = SpecificationsCar.TYPE_CONTENT_INT),
+        SpecificationsCar(R.string.numOfSeats, contentInt = numOfSeats, type = SpecificationsCar.TYPE_CONTENT_INT),
+        SpecificationsCar(R.string.length, contentInt = length, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
+        SpecificationsCar(R.string.width, contentInt = width, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
+        SpecificationsCar(R.string.height, contentInt = height, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
+        SpecificationsCar(R.string.undercarriageDistance, contentInt = undercarriageDistance, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
+        SpecificationsCar(R.string.airBag, contentInt = airBag, type = SpecificationsCar.TYPE_CONTENT_INT),
+
+        SpecificationsCar(R.string.BSW, contentBoolean = BSW, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+        SpecificationsCar(R.string.RCTA, contentBoolean = RCTA, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+        SpecificationsCar(R.string.LCDN, contentBoolean = LCDN, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+        SpecificationsCar(R.string.ABS, contentBoolean = ABS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+        SpecificationsCar(R.string.VRS, contentBoolean = VRS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+        SpecificationsCar(R.string.WPCS, contentBoolean = WPCS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+    )
 }
