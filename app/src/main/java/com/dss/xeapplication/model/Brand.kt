@@ -10,7 +10,7 @@ data class Brand(
 
 
     enum class NameBrand {
-        All, Mitsubishi, Toyota, Honda, Ford, Huyndai, Kia, Vinfast, Mazda
+        All, Mitsubishi, Toyota, Honda, Ford, Huyndai, Kia, Vinfast, Mazda,BMW, Audi
     }
 
 }
@@ -54,5 +54,15 @@ object BrandProvider {
         "https://firebasestorage.googleapis.com/v0/b/xeapp-2a308.appspot.com/o/brand%2Fford.png?alt=media&token=4f658240-2df6-4876-a991-3cbb35841993"
     )
 
-    val listBrand = arrayListOf(ALL, MITSUBISHI, TOYOTA, HONDA, HUYNDAI, KIA, VINFAST, MAZDA, FORD)
+    val BMW = Brand(
+        Brand.NameBrand.BMW,
+        "https://firebasestorage.googleapis.com/v0/b/xeapp-2a308.appspot.com/o/brand%2Fbmw.jpg?alt=media&token=52538cee-34a1-4baf-a8b5-9d058fe90a18"
+    )
+
+    val AUDI = Brand(
+        Brand.NameBrand.Audi,
+        "https://firebasestorage.googleapis.com/v0/b/xeapp-2a308.appspot.com/o/brand%2Faudi.jpg?alt=media&token=6cde2877-211a-4f09-941e-4f21b0aa115a"
+    )
+
+    val listBrand = arrayListOf(ALL, MITSUBISHI, TOYOTA, HONDA, HUYNDAI, KIA, VINFAST, MAZDA, FORD,BMW,AUDI)
 }

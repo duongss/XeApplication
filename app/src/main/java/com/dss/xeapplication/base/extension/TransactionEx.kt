@@ -14,7 +14,7 @@ import com.dss.xeapplication.base.BaseFragment
 inline fun FragmentManager.inTransaction(
     stateChange: Boolean = true,
     isAnim: Boolean = true,
-    animEnter: Int = R.anim.slide_in,
+    animEnter: Int = R.anim.enter_from_left,
     animExit: Int = R.anim.exit_from_left,
     func: FragmentTransaction.() -> Unit
 ) {

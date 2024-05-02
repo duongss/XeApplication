@@ -1,19 +1,25 @@
 package com.dss.xeapplication.ui.main.page.home
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.extension.addFragment
+import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
+import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentHomeBinding
-import com.dss.xeapplication.ui.adapter.AdapterBrand
-import com.dss.xeapplication.ui.adapter.AdapterCar
-import com.dss.xeapplication.ui.diaglog.FilterBottomDialog
 import com.dss.xeapplication.model.BrandProvider
 import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.model.Sorter
+import com.dss.xeapplication.ui.adapter.AdapterBrand
+import com.dss.xeapplication.ui.adapter.AdapterCar
 import com.dss.xeapplication.ui.detailcar.DetailCarFragment
+import com.dss.xeapplication.ui.diaglog.FilterBottomDialog
+import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
+import com.dss.xeapplication.ui.search.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,12 +37,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private lateinit var adapterBrand: AdapterBrand
 
     private val viewModel by viewModels<HomeViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
 
+    private var yList = 0
     override fun initConfig() {
         super.initConfig()
         initAdapterCar()
         initAdapterBrand()
         binding.tvLocation.text = getString(R.string.viet_nam)
+        binding.btnTop.gone()
 
     }
 
@@ -61,6 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             }
             adapterBrand.notifyItemChanged(i)
         }
+
     }
 
     override fun initObserver() {
@@ -77,6 +87,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
 
         binding.ivSort.onAvoidDoubleClick {
             showChildDialog(FilterBottomDialog.newInstance())
+        }
+
+
+        binding.rcvCar.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                yList = dy
+
+                if (dy > 0) {
+                    activityViewModel.bottomHidden()
+                } else if (dy < 0) {
+                    activityViewModel.bottomVisible()
+                }
+
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+                    if (yList <= 0) {
+                        binding.btnTop.gone()
+                    } else {
+                        yList = 0
+                        binding.btnTop.visible()
+                    }
+                }
+            }
+        })
+
+        binding.btnSearch.onAvoidDoubleClick {
+            startActivity(SearchActivity.newIntent(requireActivity()))
+        }
+
+        binding.btnTop.setOnClickListener {
+            binding.rcvCar.smoothScrollToPosition(0)
+            binding.btnTop.gone()
         }
     }
 

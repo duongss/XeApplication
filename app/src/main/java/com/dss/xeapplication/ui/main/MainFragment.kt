@@ -1,6 +1,9 @@
 package com.dss.xeapplication.ui.main
 
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.Activity.RESULT_OK
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
@@ -8,7 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
+import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.showChildDialog
+import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentMainBinding
 import com.dss.xeapplication.ui.diaglog.UpgradeVersionDialog
 import com.dss.xeapplication.ui.main.page.home.HomeFragment
@@ -45,6 +50,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
     private var blockUpdate = false
 
+    private var isViewMode: Boolean = false
+    
     private lateinit var appUpdateManager: AppUpdateManager
 
     val updateLauncher =
@@ -117,6 +124,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         viewModel.currentPage.observe(this) {
             binding.vpData.currentItem = it
         }
+
+        viewModel.isHiddenBottom.observe(this){
+            if (it) openViewMode() else closeViewMode()
+        }
     }
 
     private fun checkUpdateApp() {
@@ -163,4 +174,71 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
     }
 
+    private val durationViewMode = 1000L
+
+    private val durationCloseViewMode = 500L
+    private fun closeViewMode() {
+        if (!isViewMode) {
+            return
+        }
+
+        val translationYAnimator1 =
+            ObjectAnimator.ofFloat(binding.bottomAppBar, "translationY", 300f, 0f)
+        translationYAnimator1.duration = durationCloseViewMode
+
+        val fadeIn1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 0f, 1f)
+        fadeIn1.duration = durationCloseViewMode
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(translationYAnimator1, fadeIn1)
+
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                binding.bottomAppBar.visible()
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                isViewMode = false
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+            }
+        })
+
+        animatorSet.start()
+    }
+
+    private fun openViewMode() {
+        if (isViewMode) {
+            return
+        }
+
+        val translationYAnimator1 =
+            ObjectAnimator.ofFloat(binding.bottomAppBar, "translationY", 0f, 300f)
+        translationYAnimator1.duration = durationViewMode
+
+        val fadeOut1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 1f, 0f)
+        fadeOut1.duration = durationViewMode
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(translationYAnimator1, fadeOut1)
+
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                isViewMode = true
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                binding.bottomAppBar.gone()
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+
+        animatorSet.start()
+    }
 }

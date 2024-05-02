@@ -4,10 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseRecyclerViewAdapter
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
-import com.dss.xeapplication.base.extension.setTint
 import com.dss.xeapplication.databinding.ItemCarBinding
 import com.dss.xeapplication.model.Car
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">XeApplication</string>
+    <string name="app_name">DCar</string>
     <string name="processing">Processing</string>
 
     <string name="description_share_app">I\'m using the %s ! Try it now! %s</string>
@@ -63,4 +63,14 @@
     <string name="ABS">Hệ thống chống bó cứng phanh</string>
     <string name="VRS">Cảm biến phía sau xe</string>
     <string name="WPCS">Sạc không dây</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="time_update_data" translatable="false">Update to 2024</string>
+    <string name="using_reward">Nhận phần thưởng</string>
+    <string name="watch_a_short_video_to">Xem quảng cáo ngắn dể nhận phần thưởng</string>
+    <string name="upgrade_to_premium_member_to_">Trở thành member sẽ mở khóa hết tính năng</string>
+    <string name="ad_is_start_in">Ad is start in %ss …</string>
+    <string name="upgrade_premium">Thành viên</string>
+    <string name="error_load_ads">Không tải được quảng cáo</string>
+    <string name="comming_soon">Đang hoàn thiện</string>
+    <string name="wait">Xin đợi</string>
 </resources>

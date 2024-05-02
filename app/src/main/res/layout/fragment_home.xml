@@ -44,7 +44,7 @@
         app:srcCompat="@drawable/ac_notification" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
+        android:id="@+id/btnSearch"
         style="@style/TextFeature2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -69,11 +69,12 @@
         app:srcCompat="@drawable/ic_filter" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_main"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView">
+        app:layout_constraintStart_toStartOf="@+id/btnSearch"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -83,6 +84,7 @@
             app:elevation="0dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -182,9 +184,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivSort"
                 tools:listitem="@layout/item_car" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <ImageView
+        android:id="@+id/btnTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/margin_main"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/bg_2"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:src="@drawable/ic_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

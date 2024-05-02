@@ -15,6 +15,11 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <activity android:name=".splash.SplashJoinActivity"
             android:exported="true">
             <intent-filter>
@@ -27,6 +32,11 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
 
 

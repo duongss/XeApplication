@@ -1,6 +1,7 @@
 package com.dss.xeapplication.ui.detailcar
 
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.dss.xeapplication.base.BaseFragment
@@ -10,7 +11,11 @@ import com.dss.xeapplication.databinding.FragmentDetailCarBinding
 import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.model.createListSpecifications
 import com.dss.xeapplication.ui.adapter.AdapterSpec
+import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -31,7 +36,7 @@ class DetailCarFragment : BaseFragment<FragmentDetailCarBinding>() {
 
     private lateinit var carBundle: Car
 
-    private val viewModel by viewModels<DetailCarViewModel>()
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun initConfig() {
         super.initConfig()
@@ -55,8 +60,11 @@ class DetailCarFragment : BaseFragment<FragmentDetailCarBinding>() {
     }
 
     private fun initAdapterCar() {
-        adapterCar = AdapterSpec(carBundle.createListSpecifications())
-        binding.rcvData.adapter = adapterCar
+        viewModel.createListDetail(carBundle){
+            adapterCar = AdapterSpec(it)
+            binding.rcvData.adapter = adapterCar
+        }
+
     }
 
     override fun initObserver() {

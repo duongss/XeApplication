@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.dss.xeapplication"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -51,6 +51,8 @@ dependencies {
     implementation ("com.google.android.material:material:1.8.0'")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'")
 
+    //ads
+    implementation ("com.google.android.gms:play-services-ads:23.0.0")
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
     implementation ("com.google.firebase:firebase-core:21.1.1")

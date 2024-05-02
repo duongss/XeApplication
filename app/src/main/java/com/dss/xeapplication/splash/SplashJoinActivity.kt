@@ -23,9 +23,9 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
 
     companion object {
 
-        private const val MAX_TIME_DISPLAY: Long = 5000
+        private const val MAX_TIME_DISPLAY: Long = 2500
 
-        private const val MIN_TIME_DISPLAY: Long = 3000
+        private const val MIN_TIME_DISPLAY: Long = 2000
     }
 
     private var totalProgress = 0f

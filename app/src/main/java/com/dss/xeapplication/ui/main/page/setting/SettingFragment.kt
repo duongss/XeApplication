@@ -28,37 +28,37 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     }
 
     private fun initAdapter() {
-        adapter = AdapterSetting()
-        adapter.set(SettingPProvider.listSetting)
-        binding.rcvData.adapter = adapter
-
-        adapter.onItemSelectListener = { s, itemBrandBinding, i ->
-            when (s) {
-                SettingPProvider.RATE -> {
-                    showChildDialog(RateUsDialog.newInstance())
-                }
-
-                SettingPProvider.EXIT -> {
-                    requireActivity().finish()
-                }
-
-                SettingPProvider.PRIVACY_POLICY -> {
-
-                }
-
-                SettingPProvider.SHARE_APP -> {
-                    requireContext().shareApp()
-                }
-
-                SettingPProvider.TERM_OF_USE -> {
-
-                }
-
-                SettingPProvider.FEEDBACK_CAR -> {
-
-                }
-            }
-        }
+//        adapter = AdapterSetting()
+//        adapter.set(SettingPProvider.listSetting)
+//        binding.rcvData.adapter = adapter
+//
+//        adapter.onItemSelectListener = { s, itemBrandBinding, i ->
+//            when (s) {
+//                SettingPProvider.RATE -> {
+//                    showChildDialog(RateUsDialog.newInstance())
+//                }
+//
+//                SettingPProvider.EXIT -> {
+//                    requireActivity().finish()
+//                }
+//
+//                SettingPProvider.PRIVACY_POLICY -> {
+//
+//                }
+//
+//                SettingPProvider.SHARE_APP -> {
+//                    requireContext().shareApp()
+//                }
+//
+//                SettingPProvider.TERM_OF_USE -> {
+//
+//                }
+//
+//                SettingPProvider.FEEDBACK_CAR -> {
+//
+//                }
+//            }
+//        }
     }
 
     override fun initObserver() {
