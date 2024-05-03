@@ -73,4 +73,7 @@
     <string name="error_load_ads">Không tải được quảng cáo</string>
     <string name="comming_soon">Đang hoàn thiện</string>
     <string name="wait">Xin đợi</string>
+    <string name="comment_issue">Phản hồi của bạn</string>
+    <string name="str_title_send">Gửi</string>
+    <string name="str_title_feed_back">Phản hồi</string>
 </resources>
