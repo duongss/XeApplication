@@ -5,6 +5,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
+import com.dss.xeapplication.base.ads.inter.InterstitialManager
+import com.dss.xeapplication.base.ads.inter.OnCompletedListener
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
@@ -52,7 +54,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private fun initAdapterCar() {
         adapterCar =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
-                addFragment(DetailCarFragment.newInstance(car))
+                InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+                    override fun onCompleted() {
+                        addFragment(DetailCarFragment.newInstance(car))
+                    }
+                })
             }, onItemMark = { car: Car, i: Int ->
                 viewModel.updateMark(car)
             })

@@ -2,7 +2,6 @@ package com.dss.xeapplication.base
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -10,10 +9,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.dss.xeapplication.App
+import com.dss.xeapplication.base.ads.inter.InterstitialManager
 import com.dss.xeapplication.base.component.ContextUtils
 import com.dss.xeapplication.base.component.DialogLoading
 import org.greenrobot.eventbus.EventBus
-import javax.inject.Inject
 
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
@@ -41,7 +40,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         bindingView()
         if (hasEventBus) EventBus.getDefault().register(this)
         dialogLoading = DialogLoading(this)
-
+        InterstitialManager.load(this)
         setContentView(binding.root)
         saveInstanceStateCalled = false
         initConfig(savedInstanceState)

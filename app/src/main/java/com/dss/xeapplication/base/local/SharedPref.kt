@@ -6,7 +6,6 @@ import android.os.Build
 import com.dss.xeapplication.App
 import com.dss.xeapplication.base.extension.getString
 import com.dss.xeapplication.base.extension.setBoolean
-import com.dss.xeapplication.base.extension.setInt
 import com.dss.xeapplication.base.extension.setLong
 import com.dss.xeapplication.base.extension.setString
 import com.dss.xeapplication.model.Sorter
@@ -156,24 +155,6 @@ object SharedPref {
             getSharedPreferences().setBoolean(VIP, value)
         }
 
-    var isSelectedRule: Int
-        get() = getSharedPreferences().getInt(SELECT_RULE, RULE_WALKTHROUGH)
-        set(value) {
-            getSharedPreferences().setInt(SELECT_RULE, value)
-        }
-
-    var typeGrid: Int
-        get() = getSharedPreferences().getInt(TYPE_GRID, TYPE_GRID_1)
-        set(value) {
-            getSharedPreferences().setInt(TYPE_GRID, value)
-        }
-
-    var isFirstPrint: Boolean
-        get() = getSharedPreferences().getBoolean(FIRST_PRINT, false)
-        set(value) {
-            getSharedPreferences().setBoolean(FIRST_PRINT, value)
-        }
-
     var interNoneRewardLoaded: Long
         get() = getSharedPreferences().getLong(LOADED_INTER_NONE_REWARD, 0)
         set(value) {
@@ -205,29 +186,10 @@ object SharedPref {
         }
 
 
-    var interstitialDisplay: Long
-        get() = getSharedPreferences().getLong(INTERSTITIAL_DISPLAY, 0)
+    var interstitialGap: Long
+        get() = getSharedPreferences().getLong(INTERSTITIAL_DISPLAY, 30000L)
         set(value) {
             getSharedPreferences().edit().putLong(INTERSTITIAL_DISPLAY, value).apply()
-        }
-
-    var appOpenDisplay: Long
-        get() = getSharedPreferences().getLong(APP_OPEN_AD_DISPLAY, 0)
-        set(value) {
-            getSharedPreferences().edit().putLong(APP_OPEN_AD_DISPLAY, value).apply()
-        }
-
-
-
-    var widthCam: Int
-        get() = getSharedPreferences().getInt(WIDTH_CAM, 0)
-        set(value) {
-            getSharedPreferences().setInt(WIDTH_CAM, value)
-        }
-    var heightCam: Int
-        get() = getSharedPreferences().getInt(HEIGHT_CAM, 0)
-        set(value) {
-            getSharedPreferences().setInt(HEIGHT_CAM, value)
         }
 
     var isStartWithCamera: Boolean

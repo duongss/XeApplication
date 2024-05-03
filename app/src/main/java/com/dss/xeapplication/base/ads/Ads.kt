@@ -4,6 +4,8 @@ import com.dss.xeapplication.BuildConfig
 
 
 object Ads {
+    var isShowFullScreen: Boolean = false
+    var fullScreenDismissTime = 0L
 
     private const val banner_test_id = "ca-app-pub-3940256099942544/6300978111"
 

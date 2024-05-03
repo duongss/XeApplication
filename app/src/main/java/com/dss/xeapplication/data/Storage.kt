@@ -1,10 +1,10 @@
 package com.dss.xeapplication.data
 
-import android.util.Log
 import com.dss.xeapplication.App
 import com.dss.xeapplication.base.extension.internalFile
 import com.dss.xeapplication.model.BrandProvider.ALL
-import com.dss.xeapplication.model.BrandProvider.FORD
+import com.dss.xeapplication.model.BrandProvider.AUDI
+import com.dss.xeapplication.model.BrandProvider.BMW
 import com.dss.xeapplication.model.BrandProvider.HONDA
 import com.dss.xeapplication.model.BrandProvider.HUYNDAI
 import com.dss.xeapplication.model.BrandProvider.KIA
@@ -75,13 +75,24 @@ object FirebaseStorage {
                             KIA.name.name.lowercase(Locale.ROOT) ->{
                                 KIA.listCar.add(it)
                             }
-                            VINFAST.name.name.lowercase(Locale.ROOT) ->{
+
+                            VINFAST.name.name.lowercase(Locale.ROOT) -> {
                                 VINFAST.listCar.add(it)
                             }
-                            HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
+
+                            HUYNDAI.name.name.lowercase(Locale.ROOT) -> {
                                 HUYNDAI.listCar.add(it)
                             }
-                            HUYNDAI.name.name.lowercase(Locale.ROOT) ->{
+
+                            HUYNDAI.name.name.lowercase(Locale.ROOT) -> {
+                                HUYNDAI.listCar.add(it)
+                            }
+
+                            BMW.name.name.lowercase(Locale.ROOT) -> {
+                                HUYNDAI.listCar.add(it)
+                            }
+
+                            AUDI.name.name.lowercase(Locale.ROOT) -> {
                                 HUYNDAI.listCar.add(it)
                             }
                         }
