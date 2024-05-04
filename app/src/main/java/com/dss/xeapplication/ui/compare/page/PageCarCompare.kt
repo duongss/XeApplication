@@ -1,18 +1,18 @@
 package com.dss.xeapplication.ui.compare.page
 
 import com.dss.xeapplication.base.BaseFragment
-import com.dss.xeapplication.databinding.FragmentCompareBinding
+import com.dss.xeapplication.databinding.FragmentCarCompareBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class PageCarAfter : BaseFragment<FragmentCompareBinding>() {
+class PageCarCompare : BaseFragment<FragmentCarCompareBinding>() {
 
-    override fun bindingView() = FragmentCompareBinding.inflate(layoutInflater)
+    override fun bindingView() = FragmentCarCompareBinding.inflate(layoutInflater)
 
     companion object {
 
-        fun newInstance() = PageCarAfter()
+        fun newInstance() = PageCarCompare()
 
     }
 
@@ -23,7 +23,6 @@ class PageCarAfter : BaseFragment<FragmentCompareBinding>() {
 
     }
 
-
     override fun initObserver() {
         super.initObserver()
 
@@ -31,7 +30,6 @@ class PageCarAfter : BaseFragment<FragmentCompareBinding>() {
 
     override fun initListener() {
         super.initListener()
-
 
     }
 

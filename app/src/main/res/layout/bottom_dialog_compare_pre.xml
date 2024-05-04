@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lnGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_main"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/rlCar1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCar1"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/bg_border_8"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvNameCar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivCar1"
+                tools:text="Xe 1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:id="@+id/ivCar2"
+                android:layout_height="120dp"
+                android:background="@drawable/bg_border_8"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tvNameCar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivCar2"
+                tools:text="Xe 1" />
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/btnClose"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="16dp"
+        android:background="?selectableItemBackground"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="14dp"
+        android:singleLine="true"
+        android:text="@string/cancel"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnGroup" />
+
+    <TextView
+        android:id="@+id/btnNext"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="?selectableItemBackground"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="14dp"
+        android:singleLine="true"
+        android:text="@string/next"
+        android:textColor="@color/color2"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnClose"
+        app:layout_constraintTop_toTopOf="@+id/btnClose"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

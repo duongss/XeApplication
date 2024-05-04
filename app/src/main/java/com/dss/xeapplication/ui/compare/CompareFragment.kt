@@ -5,8 +5,8 @@ import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
 import com.dss.xeapplication.base.extension.removeSelf
 import com.dss.xeapplication.databinding.FragmentCompareBinding
-import com.dss.xeapplication.ui.main.page.home.HomeFragment
-import com.dss.xeapplication.ui.main.page.setting.SettingFragment
+import com.dss.xeapplication.ui.compare.page.PageCarCompare
+import com.dss.xeapplication.ui.compare.page.PageResult
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +17,9 @@ class CompareFragment : BaseFragment<FragmentCompareBinding>() {
     override fun bindingView() = FragmentCompareBinding.inflate(layoutInflater)
 
     companion object {
+        const val PAGE_BEFORE = 0
+        const val PAGE_RESULT = 1
+        const val PAGE_AFTER = 2
 
         fun newInstance() = CompareFragment()
 
@@ -37,14 +40,14 @@ class CompareFragment : BaseFragment<FragmentCompareBinding>() {
 
     private fun initPage() {
         arrayTabFragment = arrayListOf(
-            HomeFragment.newInstance(), SettingFragment.newInstance()
+            PageCarCompare.newInstance(), PageResult.newInstance(), PageCarCompare.newInstance()
         )
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager, lifecycle, arrayTabFragment
         )
-        binding.vpData.isUserInputEnabled = false
         binding.vpData.offscreenPageLimit = arrayTabFragment.size
         binding.vpData.adapter = viewPagerAdapter
+        binding.vpData.currentItem = PAGE_RESULT
     }
 
     override fun initObserver() {

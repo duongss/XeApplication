@@ -3,15 +3,15 @@ package com.dss.xeapplication.ui.compare.page
 import androidx.fragment.app.activityViewModels
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
-import com.dss.xeapplication.databinding.FragmentCompareBinding
+import com.dss.xeapplication.databinding.FragmentCarResultCompareBinding
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class PageResult : BaseFragment<FragmentCompareBinding>() {
+class PageResult : BaseFragment<FragmentCarResultCompareBinding>() {
 
-    override fun bindingView() = FragmentCompareBinding.inflate(layoutInflater)
+    override fun bindingView() = FragmentCarResultCompareBinding.inflate(layoutInflater)
 
     companion object {
 

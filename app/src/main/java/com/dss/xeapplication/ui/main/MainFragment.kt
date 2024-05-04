@@ -11,13 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
-import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
 import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentMainBinding
-import com.dss.xeapplication.ui.compare.CompareFragment
 import com.dss.xeapplication.ui.diaglog.UpgradeVersionDialog
 import com.dss.xeapplication.ui.main.page.home.HomeFragment
 import com.dss.xeapplication.ui.main.page.setting.SettingFragment
@@ -118,7 +116,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         }
 
         binding.btnCompare.onAvoidDoubleClick {
-            addFragment(CompareFragment.newInstance())
+
         }
 
         backListener {
