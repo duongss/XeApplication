@@ -43,13 +43,22 @@
             tools:text="Tên xe" />
 
         <TextView
-            android:id="@+id/tvBrand"
-            style="@style/TextFeature2"
+            android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="@+id/tvName"
             app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="100 triệu" />
+
+        <TextView
+            android:id="@+id/tvBrand"
+            style="@style/TextFeature2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/tvPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice"
             tools:text="Hang xe" />
 
         <androidx.appcompat.widget.AppCompatImageView

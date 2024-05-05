@@ -1,5 +1,6 @@
 package com.dss.xeapplication.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +9,12 @@ import com.dss.xeapplication.base.BaseRecyclerViewAdapter
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.databinding.ItemCarBinding
 import com.dss.xeapplication.model.Car
+import com.dss.xeapplication.model.CompareCarData
 
-class AdapterCar(var onItemSelect: (Car, Int) -> Unit,var onItemMark: (Car, Int) -> Unit) :
+class AdapterCar(var onItemSelect: (Car, Int) -> Unit, var onItemMark: (Car, Int) -> Unit) :
     BaseRecyclerViewAdapter<Car, ItemCarBinding>() {
+
+    private var isShowSelected = false
 
     override fun providesItemViewBinding(parent: ViewGroup, viewType: Int) =
         ItemCarBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,19 +31,44 @@ class AdapterCar(var onItemSelect: (Car, Int) -> Unit,var onItemMark: (Car, Int)
             append("    ")
             append(data.model)
         }
+        if (isShowSelected){
+            binding.root.isSelected = data.isSelected
+        }else{
+            binding.root.isSelected = false
+        }
         binding.tvPrice.text = data.currentPrice
         binding.tvNumberChair.text = data.numOfSeats.toString()
         binding.tvBrand.text = data.brand
 
         binding.ivBookMark.isActivated = data.isMark
         binding.root.onAvoidDoubleClick {
-            onItemSelect(data,position)
+            onItemSelect(data, position)
         }
 
         binding.ivBookMark.onAvoidDoubleClick {
             data.isMark = !data.isMark
-            onItemMark(data,position)
+            onItemMark(data, position)
             notifyItemChanged(position)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun inSelected(isShow :Boolean = false) {
+        isShowSelected = isShow
+        notifyDataSetChanged()
+    }
+
+    fun syncSelected(c: CompareCarData) {
+         dataList.forEachIndexed { index, car ->
+             if (c.car1?.id == car.id){
+                 car.isSelected = true
+             } else if (c.car2?.id == car.id) {
+                 car.isSelected = true
+             } else{
+                 car.isSelected = false
+             }
+
+         }
+        notifyDataSetChanged()
     }
 }

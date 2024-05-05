@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingVertical="@dimen/margin_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -33,6 +34,7 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/tvNameCar1"
                 android:layout_width="wrap_content"
+                style="@style/TextFeature2"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ivCar1"
                 tools:text="Xe 1" />
@@ -57,6 +59,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/tvNameCar2"
+                style="@style/TextFeature2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ivCar2"

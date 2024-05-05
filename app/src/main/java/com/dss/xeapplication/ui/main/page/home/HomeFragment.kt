@@ -9,6 +9,7 @@ import com.dss.xeapplication.base.ads.inter.InterstitialManager
 import com.dss.xeapplication.base.ads.inter.OnCompletedListener
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
+import com.dss.xeapplication.base.extension.invisible
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
 import com.dss.xeapplication.base.extension.visible
@@ -18,15 +19,19 @@ import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.model.Sorter
 import com.dss.xeapplication.ui.adapter.AdapterBrand
 import com.dss.xeapplication.ui.adapter.AdapterCar
+import com.dss.xeapplication.ui.compare.CompareFragment
+import com.dss.xeapplication.ui.compare.ComparePreBottomDialog
 import com.dss.xeapplication.ui.detailcar.DetailCarFragment
 import com.dss.xeapplication.ui.diaglog.FilterBottomDialog
+import com.dss.xeapplication.ui.diaglog.UnlockRewardDialog
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import com.dss.xeapplication.ui.search.SearchActivity
+import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.FilterListener {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.FilterListener,ComparePreBottomDialog.PreCompareListener,UnlockRewardDialog.UnlockForFreeListener{
 
     override fun bindingView() = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -42,6 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private val activityViewModel by activityViewModels<MainViewModel>()
 
     private var yList = 0
+
     override fun initConfig() {
         super.initConfig()
         initAdapterCar()
@@ -54,11 +60,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private fun initAdapterCar() {
         adapterCar =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
-                InterstitialManager.show(requireActivity(), object : OnCompletedListener {
-                    override fun onCompleted() {
-                        addFragment(DetailCarFragment.newInstance(car))
+                if (activityViewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE){
+                    InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+                        override fun onCompleted() {
+                            addFragment(DetailCarFragment.newInstance(car))
+                        }
+                    })
+                }else{
+                    activityViewModel.compareCarData.value?.let {
+                        when (activityViewModel.stateCompare.value) {
+                            MainViewModel.STATE_PICK_COMPARE_CAR_1 -> {
+                                activityViewModel.updateCar1(car)
+
+                            }
+                            MainViewModel.STATE_PICK_COMPARE_CAR_2 -> {
+                                activityViewModel.updateCar2(car)
+                            }
+                        }
+
+                        adapterCar.syncSelected(it)
+                        if (it.car1!=null && it.car2!=null){
+                            showChildDialog(ComparePreBottomDialog.newInstance())
+                        }
                     }
-                })
+                }
+
             }, onItemMark = { car: Car, i: Int ->
                 viewModel.updateMark(car)
             })
@@ -85,6 +111,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         viewModel.dataCars.observe(this) {
             adapterCar.set(it)
             adapterBrand.set(BrandProvider.listBrand)
+        }
+
+        activityViewModel.stateCompare.observe(requireActivity()){
+            when(it){
+                MainViewModel.STATE_CLOSE_PICK_COMPARE->{
+                    adapterCar.inSelected(false)
+                    binding.cslGroup.visible()
+                    binding.lnGroupCompare.gone()
+                }
+
+                MainViewModel.STATE_PICK_COMPARE_CAR_1 -> {
+                    adapterCar.inSelected(true)
+                    binding.cslGroup.invisible()
+                    binding.lnGroupCompare.visible()
+                }
+
+                MainViewModel.STATE_PICK_COMPARE_CAR_2 -> {
+                    adapterCar.inSelected(true)
+                    binding.cslGroup.invisible()
+                    binding.lnGroupCompare.visible()
+                }
+            }
         }
     }
 
@@ -132,9 +180,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             binding.rcvCar.smoothScrollToPosition(0)
             binding.btnTop.gone()
         }
+
+        binding.btnExitCompare.onAvoidDoubleClick {
+            activityViewModel.updateStateCompare(MainViewModel.STATE_CLOSE_PICK_COMPARE)
+        }
     }
 
     override fun filterCall(sorter: Sorter) {
         viewModel.initDataCars()
+    }
+
+    override fun onNext() {
+        if (SharedPref.isVip){
+            onUnlockedFromUser()
+        }else{
+            showChildDialog(UnlockRewardDialog.newInstance())
+        }
+    }
+
+    override fun onUnlockedFromUser() {
+        binding.btnExitCompare.performClick()
+        addFragment(CompareFragment.newInstance())
     }
 }

@@ -56,7 +56,7 @@ object BrandProvider {
 
     val BMW = Brand(
         Brand.NameBrand.BMW,
-        "https://firebasestorage.googleapis.com/v0/b/xeapp-2a308.appspot.com/o/brand%2Fbmw.jpg?alt=media&token=52538cee-34a1-4baf-a8b5-9d058fe90a18"
+        "https://firebasestorage.googleapis.com/v0/b/xeapp-2a308.appspot.com/o/brand%2Fbmw.png?alt=media&token=6360dea4-dd99-43f4-b7f8-9b8b1cdf1452"
     )
 
     val AUDI = Brand(

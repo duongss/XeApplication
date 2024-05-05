@@ -52,6 +52,7 @@ class DetailCarFragment : BaseFragment<FragmentDetailCarBinding>() {
                 append(model)
             }
             binding.tvBrand.text = brand
+            binding.tvPrice.text = currentPrice
             binding.ivBookMark.isActivated = isMark
         }
 

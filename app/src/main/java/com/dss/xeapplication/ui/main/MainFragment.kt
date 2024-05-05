@@ -9,13 +9,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.dss.xeapplication.MainActivity
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
+import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
+import com.dss.xeapplication.base.extension.showDialog
 import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentMainBinding
+import com.dss.xeapplication.ui.compare.CompareFragment
+import com.dss.xeapplication.ui.compare.ComparePreBottomDialog
+import com.dss.xeapplication.ui.diaglog.UnlockRewardDialog
 import com.dss.xeapplication.ui.diaglog.UpgradeVersionDialog
 import com.dss.xeapplication.ui.main.page.home.HomeFragment
 import com.dss.xeapplication.ui.main.page.setting.SettingFragment
@@ -25,11 +31,12 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.OnUpdateAppListener {
+class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.OnUpdateAppListener,ComparePreBottomDialog.PreCompareListener,UnlockRewardDialog.UnlockForFreeListener {
     override fun bindingView() = FragmentMainBinding.inflate(layoutInflater)
 
 
@@ -52,8 +59,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
     private var blockUpdate = false
 
     private var isViewMode: Boolean = false
-    
+
     private lateinit var appUpdateManager: AppUpdateManager
+
 
     val updateLauncher =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
@@ -96,6 +104,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
                         binding.tvHome.clicked()
                         binding.tvTool.nclicked()
                     }
+
                     PAGE_TOOL -> {
                         binding.ivHome.isActivated = false
                         binding.ivTool.isActivated = true
@@ -116,7 +125,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         }
 
         binding.btnCompare.onAvoidDoubleClick {
-
+            showChildDialog(ComparePreBottomDialog.newInstance())
         }
 
         backListener {
@@ -130,7 +139,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
             binding.vpData.currentItem = it
         }
 
-        viewModel.isHiddenBottom.observe(this){
+        viewModel.isHiddenBottom.observe(this) {
             if (it) openViewMode() else closeViewMode()
         }
     }
@@ -200,7 +209,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         animatorSet.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
                 binding.bottomAppBar.visible()
-                binding.btnCompare.visible()
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -239,7 +247,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
             override fun onAnimationEnd(animation: Animator) {
                 binding.bottomAppBar.gone()
-                binding.btnCompare.gone()
             }
 
             override fun onAnimationCancel(animation: Animator) {}
@@ -247,5 +254,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         })
 
         animatorSet.start()
+    }
+
+    override fun onNext() {
+        if (SharedPref.isVip){
+            addFragment(CompareFragment.newInstance())
+        }else{
+            showChildDialog(UnlockRewardDialog.newInstance())
+        }
+    }
+
+    override fun onUnlockedFromUser() {
+        addFragment(CompareFragment.newInstance())
     }
 }

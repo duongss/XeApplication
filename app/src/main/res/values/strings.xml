@@ -77,4 +77,7 @@
     <string name="str_title_send">Gửi</string>
     <string name="str_title_feed_back">Phản hồi</string>
     <string name="next">Tiếp theo</string>
+    <string name="compare_select_mode" >Chọn xe để so sánh</string>
+    <string name="exit_mode_compare">Hủy chọn</string>
+    <string name="inSelect">Đang chọn</string>
 </resources>
