@@ -6,62 +6,128 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpData"
+    <FrameLayout
+        android:id="@+id/fr1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_rounder_bottom_1"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivClose"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_margin="14dp"
+        android:padding="10dp"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/lnGroupOption"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        app:srcCompat="@drawable/ic_close" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/lnGroupOption"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/bg_rounder_top_1"
-        app:layout_constraintBottom_toBottomOf="parent">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivF"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_margin="14dp"
+        android:visibility="invisible"
+        android:padding="10dp"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivClose" />
 
-        <FrameLayout
-            android:id="@+id/btnBack"
-            android:background="?selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextFeature1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compare"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivClose" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="28dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivF"
+        app:layout_constraintStart_toStartOf="@+id/ivClose"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvPoint"
+                style="@style/TextFeature1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/compare"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_gravity="center"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:srcCompat="@drawable/ac_arrow_left" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/btnForward"
-            android:background="?selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+                android:id="@+id/ivCarBefore"
+                android:layout_width="@dimen/width_image_compare"
+                android:layout_height="@dimen/height_image_compare"
+                android:layout_marginBottom="@dimen/margin_main"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPoint" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_gravity="center"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:srcCompat="@drawable/ac_arrow_right" />
-        </FrameLayout>
+                android:id="@+id/ivCarAfter"
+                android:layout_width="@dimen/width_image_compare"
+                android:layout_height="@dimen/height_image_compare"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCarBefore"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPoint" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
-            android:background="?selectableItemBackground"
-            android:id="@+id/btnClose"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+    </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_gravity="center"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_close" />
-        </FrameLayout>
+    <TextView
+        android:id="@+id/tvDetail"
+        style="@style/TextFeature1"
+        android:layout_marginTop="@dimen/margin_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detail"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/cvGroup"
+        app:layout_constraintTop_toBottomOf="@+id/cvGroup" />
 
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_main"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

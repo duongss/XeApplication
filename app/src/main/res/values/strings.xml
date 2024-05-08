@@ -80,4 +80,6 @@
     <string name="compare_select_mode" >Chọn xe để so sánh</string>
     <string name="exit_mode_compare">Hủy chọn</string>
     <string name="inSelect">Đang chọn</string>
+    <string name="compare">So sánh</string>
+    <string name="detail">Chi tiết</string>
 </resources>
