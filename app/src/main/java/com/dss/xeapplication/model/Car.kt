@@ -95,3 +95,11 @@ fun Car.createListSpecifications(): ArrayList<SpecificationsCar> {
         SpecificationsCar(R.string.WPCS, contentBoolean = WPCS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
     )
 }
+
+fun Car.nameWithModel(): String {
+    return buildString {
+        append(name)
+        append(" ")
+        append(model)
+    }
+}

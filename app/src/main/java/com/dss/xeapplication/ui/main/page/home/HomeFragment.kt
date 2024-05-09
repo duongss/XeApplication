@@ -199,6 +199,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     }
 
     override fun onUnlockedFromUser() {
+        activityViewModel.createListCompare()
         binding.btnExitCompare.performClick()
         addFragment(CompareFragment.newInstance())
     }

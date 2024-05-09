@@ -45,6 +45,10 @@ class FeedbackFragment : BaseFragment<FragmentFeedbackBinding>() {
             removeSelf()
         }
 
+        backListener(binding.toolbar.btnBack) {
+            removeSelf()
+        }
+
         binding.btnSendFeedback.onAvoidDoubleClick {
             val feedbackContent = binding.edtFeedback.text
             val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))

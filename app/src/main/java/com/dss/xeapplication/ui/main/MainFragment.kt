@@ -9,14 +9,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.dss.xeapplication.MainActivity
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
-import com.dss.xeapplication.base.extension.showDialog
 import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentMainBinding
 import com.dss.xeapplication.ui.compare.CompareFragment
@@ -258,13 +256,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
     override fun onNext() {
         if (SharedPref.isVip){
-            addFragment(CompareFragment.newInstance())
+            onUnlockedFromUser()
         }else{
             showChildDialog(UnlockRewardDialog.newInstance())
         }
     }
 
     override fun onUnlockedFromUser() {
+        viewModel.createListCompare()
         addFragment(CompareFragment.newInstance())
     }
 }

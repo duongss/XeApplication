@@ -53,11 +53,11 @@ class HomeViewModel @Inject constructor(
         if (filter.usingTime) {
             when (filter.timeFilter) {
                 Sorter.TimeFilter.NEW_TO_OLDEST -> {
-                    listData.sortBy { it.year }
+                    listData.sortByDescending { it.year }
                 }
 
                 Sorter.TimeFilter.OLDEST_TO_NEW -> {
-                    listData.sortByDescending { it.year }
+                    listData.sortBy { it.year }
                 }
             }
         } else if (filter.usingPrice) {

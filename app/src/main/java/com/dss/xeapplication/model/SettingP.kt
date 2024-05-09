@@ -34,5 +34,5 @@ object SettingPProvider {
         R.string.exit,R.drawable.ic_exit
     )
 
-    val listSetting = arrayListOf(RATE, FEEDBACK_CAR, SHARE_APP, TERM_OF_USE, PRIVACY_POLICY, EXIT)
+    val listSetting = arrayListOf(RATE, FEEDBACK_CAR, SHARE_APP, PRIVACY_POLICY, EXIT)
 }

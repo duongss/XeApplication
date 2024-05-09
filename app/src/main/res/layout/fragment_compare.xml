@@ -31,9 +31,9 @@
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_margin="14dp"
-        android:visibility="invisible"
         android:padding="10dp"
         android:tint="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/ivClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivClose" />
@@ -65,36 +65,49 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="28dp"
         app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="@+id/ivF"
         app:layout_constraintStart_toStartOf="@+id/ivClose"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingHorizontal="14dp">
 
             <TextView
-                android:id="@+id/tvPoint"
+                android:id="@+id/tvNameCar1"
                 style="@style/TextFeature1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_main"
                 android:text="@string/compare"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivCarBefore"
+                app:layout_constraintStart_toStartOf="@+id/ivCarBefore"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvNameCar2"
+                style="@style/TextFeature1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/compare"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivCarAfter"
+                app:layout_constraintStart_toStartOf="@+id/ivCarAfter"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="10dp"
                 android:id="@+id/ivCarBefore"
                 android:layout_width="@dimen/width_image_compare"
                 android:layout_height="@dimen/height_image_compare"
-                android:layout_marginBottom="@dimen/margin_main"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPoint" />
+                app:layout_constraintTop_toBottomOf="@+id/tvNameCar1" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivCarAfter"
@@ -103,21 +116,67 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="@+id/ivCarBefore"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPoint" />
+                app:layout_constraintTop_toTopOf="@+id/ivCarBefore" />
+
+            <TextView
+                android:id="@+id/tvPrice1"
+                style="@style/TextFeature1"
+                android:singleLine="true"
+                android:textColor="@color/color8"
+                android:ellipsize="end"
+                android:layout_marginTop="6dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/detail"
+                android:gravity="center"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivCarBefore"
+                app:layout_constraintStart_toStartOf="@+id/ivCarBefore"
+                app:layout_constraintTop_toBottomOf="@+id/ivCarBefore" />
+
+            <TextView
+                android:id="@+id/tvPrice2"
+                android:layout_marginTop="6dp"
+                style="@style/TextFeature1"
+                android:singleLine="true"
+                android:textColor="@color/color8"
+                android:ellipsize="end"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/detail"
+                android:gravity="center"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivCarAfter"
+                app:layout_constraintStart_toStartOf="@+id/ivCarAfter"
+                app:layout_constraintTop_toBottomOf="@+id/ivCarAfter" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieGear"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="@dimen/margin_main"
+        android:background="?selectableItemBackground"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvGroup"
+        app:lottie_loop="true" />
+
     <TextView
         android:id="@+id/tvDetail"
         style="@style/TextFeature1"
-        android:layout_marginTop="@dimen/margin_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="@string/detail"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/cvGroup"
-        app:layout_constraintTop_toBottomOf="@+id/cvGroup" />
+        app:layout_constraintBottom_toBottomOf="@+id/lottieGear"
+        app:layout_constraintStart_toEndOf="@+id/lottieGear"
+        app:layout_constraintTop_toTopOf="@+id/lottieGear" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvData"

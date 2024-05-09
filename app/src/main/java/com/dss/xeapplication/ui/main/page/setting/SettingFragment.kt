@@ -5,9 +5,9 @@ import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.shareApp
 import com.dss.xeapplication.base.extension.showChildDialog
 import com.dss.xeapplication.databinding.FragmentSettingBinding
+import com.dss.xeapplication.model.SettingPProvider
 import com.dss.xeapplication.ui.adapter.AdapterSetting
 import com.dss.xeapplication.ui.diaglog.RateUsDialog
-import com.dss.xeapplication.model.SettingPProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,7 +44,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                 }
 
                 SettingPProvider.PRIVACY_POLICY -> {
-
+                    addFragment(PrivacyFragment.newInstance())
                 }
 
                 SettingPProvider.SHARE_APP -> {
