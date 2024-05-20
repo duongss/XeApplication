@@ -9,21 +9,27 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import com.dss.xeapplication.MainActivity
+import androidx.fragment.app.viewModels
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseActivity
+import com.dss.xeapplication.base.BaseFragment
+import com.dss.xeapplication.base.ads.inter.InterstitialManager
+import com.dss.xeapplication.base.ads.inter.OnCompletedListener
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
+import com.dss.xeapplication.base.extension.hideSoftKeyboard
+import com.dss.xeapplication.base.extension.removeSelf
 import com.dss.xeapplication.base.extension.showSoftKeyboard
 import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentSearchBinding
 import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.ui.adapter.AdapterCar
 import com.dss.xeapplication.ui.detailcar.DetailCarFragment
+import com.dss.xeapplication.ui.main.page.setting.SettingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchActivity : BaseActivity<FragmentSearchBinding>() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun bindingView() = FragmentSearchBinding.inflate(layoutInflater)
 
@@ -36,16 +42,11 @@ class SearchActivity : BaseActivity<FragmentSearchBinding>() {
     private lateinit var searchEdit: EditText
 
     companion object {
-        fun newIntent(
-            context: Context
-        ): Intent {
-            return Intent(context, SearchActivity::class.java)
-        }
+        fun newInstance() = SearchFragment()
     }
 
-
-    override fun initConfig(savedInstanceState: Bundle?) {
-        super.initConfig(savedInstanceState)
+    override fun initConfig() {
+        super.initConfig()
         initSearch()
         initAdapterFeature()
     }
@@ -56,13 +57,13 @@ class SearchActivity : BaseActivity<FragmentSearchBinding>() {
         closeSearchImageView =
             binding.layoutSearch.findViewById(androidx.appcompat.R.id.search_close_btn)
         searchEdit.textSize = resources.getDimension(R.dimen.size_small)
-        searchEdit.setTextColor(ContextCompat.getColor(this, R.color.black))
+        searchEdit.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         binding.layoutSearch.onActionViewExpanded()
         searchEdit.performClick()
         binding.layoutSearch.setOnQueryTextFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 Handler(Looper.getMainLooper()).postDelayed({
-                    showSoftKeyboard(searchEdit)
+                    requireActivity().showSoftKeyboard(searchEdit)
                 }, 500)
             }
         }
@@ -102,14 +103,20 @@ class SearchActivity : BaseActivity<FragmentSearchBinding>() {
         })
 
         backListener(binding.ivClose) {
-            finish()
+            requireActivity().hideSoftKeyboard(searchEdit)
+            removeSelf()
         }
     }
 
     private fun initAdapterFeature() {
         adapter =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
-                addFragment(DetailCarFragment.newInstance(car))
+                requireActivity().hideSoftKeyboard(searchEdit)
+                InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+                    override fun onCompleted() {
+                        addFragment(DetailCarFragment.newInstance(car))
+                    }
+                })
             }, onItemMark = { car: Car, i: Int ->
                 viewModel.updateMark(car)
             })

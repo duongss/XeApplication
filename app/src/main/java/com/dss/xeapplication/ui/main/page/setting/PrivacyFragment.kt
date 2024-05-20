@@ -19,6 +19,9 @@ class PrivacyFragment : BaseFragment<FragmentPrivacyBinding>() {
             append("\n")
             append("\n")
             append("- The application commits not to collect and use any personal data from the user's device.")
+            append("\n")
+            append("\n")
+            append("- The application is not sponsored by any third party. All data used is for reference purposes only.")
         }
 
         backListener(binding.ivClose) {

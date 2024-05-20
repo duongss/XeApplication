@@ -1,10 +1,12 @@
 package com.dss.xeapplication.data
 
+import android.util.Log
 import com.dss.xeapplication.App
 import com.dss.xeapplication.base.extension.internalFile
 import com.dss.xeapplication.model.BrandProvider.ALL
 import com.dss.xeapplication.model.BrandProvider.AUDI
 import com.dss.xeapplication.model.BrandProvider.BMW
+import com.dss.xeapplication.model.BrandProvider.FORD
 import com.dss.xeapplication.model.BrandProvider.HONDA
 import com.dss.xeapplication.model.BrandProvider.HUYNDAI
 import com.dss.xeapplication.model.BrandProvider.KIA
@@ -13,7 +15,10 @@ import com.dss.xeapplication.model.BrandProvider.MITSUBISHI
 import com.dss.xeapplication.model.BrandProvider.TOYOTA
 import com.dss.xeapplication.model.BrandProvider.VINFAST
 import com.dss.xeapplication.model.Car
+import com.dss.xeapplication.model.Notification
 import com.google.firebase.Firebase
+import com.google.firebase.database.database
+import com.google.firebase.database.getValue
 import com.google.firebase.storage.storage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -31,6 +36,7 @@ object FirebaseStorage {
 
     var markList = arrayListOf<Car>()
     var listCar = arrayListOf<Car>()
+    var listNotification = arrayListOf<Notification>()
 
     fun initData(result: (Boolean) -> Unit) {
 
@@ -44,8 +50,19 @@ object FirebaseStorage {
         val storage = Firebase.storage
         val storageRef = storage.reference
         val pathReference = storageRef.child(nameFileJsonCar)
-
+        val database = Firebase.database.reference
         val localFile = File.createTempFile("DataCar", "json", context.internalFile())
+
+
+        database.get().addOnSuccessListener {
+            it.children.forEach {
+                val notification =  it.getValue(Notification::class.java)
+                notification?.let { s -> listNotification.add(s) }
+            }
+
+        }.addOnFailureListener{
+            Log.e(TAG, "Error getting data", it)
+        }
 
         pathReference.getFile(localFile).addOnSuccessListener {
             CoroutineScope(Dispatchers.IO).launch {
@@ -80,8 +97,8 @@ object FirebaseStorage {
                                 VINFAST.listCar.add(it)
                             }
 
-                            HUYNDAI.name.name.lowercase(Locale.ROOT) -> {
-                                HUYNDAI.listCar.add(it)
+                            FORD.name.name.lowercase(Locale.ROOT) -> {
+                                FORD.listCar.add(it)
                             }
 
                             HUYNDAI.name.name.lowercase(Locale.ROOT) -> {
@@ -89,11 +106,11 @@ object FirebaseStorage {
                             }
 
                             BMW.name.name.lowercase(Locale.ROOT) -> {
-                                HUYNDAI.listCar.add(it)
+                                BMW.listCar.add(it)
                             }
 
                             AUDI.name.name.lowercase(Locale.ROOT) -> {
-                                HUYNDAI.listCar.add(it)
+                                AUDI.listCar.add(it)
                             }
                         }
                     }catch (e:Exception){

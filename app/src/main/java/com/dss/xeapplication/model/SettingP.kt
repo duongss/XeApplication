@@ -22,10 +22,6 @@ object SettingPProvider {
         R.string.share_app,R.drawable.ic_share
     )
 
-    val TERM_OF_USE = SettingP(
-        R.string.term_of_use,R.drawable.ic_fire
-    )
-
     val PRIVACY_POLICY = SettingP(
         R.string.privacy_policy,R.drawable.ic_security
     )

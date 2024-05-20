@@ -1,21 +1,19 @@
 package com.dss.xeapplication.ui.detailcar
 
+import android.os.Handler
+import android.os.Looper
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.dss.xeapplication.base.BaseFragment
-import com.dss.xeapplication.base.extension.onAvoidDoubleClick
+import com.dss.xeapplication.base.extension.hideSoftKeyboard
 import com.dss.xeapplication.base.extension.removeSelf
+import com.dss.xeapplication.base.extension.showSoftKeyboard
 import com.dss.xeapplication.databinding.FragmentDetailCarBinding
 import com.dss.xeapplication.model.Car
-import com.dss.xeapplication.model.createListSpecifications
 import com.dss.xeapplication.ui.adapter.AdapterSpec
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -40,6 +38,9 @@ class DetailCarFragment : BaseFragment<FragmentDetailCarBinding>() {
 
     override fun initConfig() {
         super.initConfig()
+        Handler(Looper.getMainLooper()).postDelayed({
+            hideSoftKeyboard()
+        }, 500)
         binding.lottieGear.setAnimation("gear_anim.json")
         binding.lottieGear.playAnimation()
         carBundle = arguments?.getParcelable(BUNDLE_DATA)!!

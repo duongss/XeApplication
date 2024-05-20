@@ -40,9 +40,11 @@
             tools:text="@string/nation" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:background="?selectableItemBackground"
             android:id="@+id/ivNotification"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="46dp"
+            android:padding="9dp"
+            android:layout_height="46dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/margin_main"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +70,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="wrap_content"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             app:layout_constraintEnd_toEndOf="@+id/ivNotification"

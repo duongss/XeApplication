@@ -51,12 +51,8 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                     requireContext().shareApp()
                 }
 
-                SettingPProvider.TERM_OF_USE -> {
-
-                }
-
                 SettingPProvider.FEEDBACK_CAR -> {
-                    addFragment(FeedbackFragment.newInstance())
+                    showChildDialog(FeedbackFragment.newInstance())
                 }
             }
         }

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import com.dss.xeapplication.R
+import com.dss.xeapplication.base.BaseDialogFragment
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.removeSelf
@@ -13,7 +14,7 @@ import com.dss.xeapplication.databinding.FragmentFeedbackBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedbackFragment : BaseFragment<FragmentFeedbackBinding>() {
+class FeedbackFragment : BaseDialogFragment<FragmentFeedbackBinding>() {
     override fun bindingView() = FragmentFeedbackBinding.inflate(layoutInflater)
 
     companion object {
@@ -42,11 +43,7 @@ class FeedbackFragment : BaseFragment<FragmentFeedbackBinding>() {
 
     override fun initListener() {
         binding.toolbar.btnBack.setOnClickListener {
-            removeSelf()
-        }
-
-        backListener(binding.toolbar.btnBack) {
-            removeSelf()
+            dismiss()
         }
 
         binding.btnSendFeedback.onAvoidDoubleClick {

@@ -23,10 +23,10 @@ object Ads {
         get() = if (BuildConfig.DEBUG) banner_test_id else "ca-app-pub-5600863247121843/5131059015"
 
     val interstitialId: String
-        get() = if (BuildConfig.DEBUG) interstitial_test_id else "ca-app-pub-5600863247121843/2013941088"
+        get() = if (BuildConfig.DEBUG) interstitial_test_id else "ca-app-pub-6764133072003430/3693302920"
 
     val interstitialRewardId: String
-        get() = if (BuildConfig.DEBUG) interstitial_reward_test_id else "ca-app-pub-5600863247121843/4037469192"
+        get() = if (BuildConfig.DEBUG) interstitial_reward_test_id else "ca-app-pub-6764133072003430/3054174523"
 
     val rewardId: String
         get() = if (BuildConfig.DEBUG) reward_test_id else "ca-app-pub-5600863247121843/3912496056"

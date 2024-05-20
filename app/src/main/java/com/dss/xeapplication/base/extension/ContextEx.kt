@@ -71,8 +71,9 @@ fun Context.string(@StringRes res: Int): String {
 }
 
 fun Context.hideSoftKeyboard(v: View) {
+    v.clearFocus()
     val inputMethodManager: InputMethodManager =
-        this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
 }
 
@@ -101,14 +102,14 @@ fun AppCompatActivity.hideSoftKeyboard() {
 }
 
 fun Fragment.hideSoftKeyboard() {
-    val inputMethodManager = requireActivity().getSystemService(
-        Activity.INPUT_METHOD_SERVICE
-    ) as InputMethodManager
-    if (inputMethodManager.isAcceptingText) {
-        inputMethodManager.hideSoftInputFromWindow(
-            requireActivity().currentFocus!!.windowToken,
-            0
-        )
+    try {
+        val imm = requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = requireActivity().currentFocus
+        if (view == null) {
+            view = View(requireActivity())
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }catch (e:Exception ){
     }
 }
 

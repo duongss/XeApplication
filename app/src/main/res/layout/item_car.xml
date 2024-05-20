@@ -10,9 +10,9 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/ivCar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
+        android:layout_width="@dimen/width_image_compare"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/tvNumberChair"
         app:layout_constraintStart_toStartOf="parent"

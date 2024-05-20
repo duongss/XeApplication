@@ -8,6 +8,6 @@
     <dimen name="padding_detail_hoz">12dp</dimen>
     <dimen name="size_small">5sp</dimen>
     <dimen name="area_size_default">56dp</dimen>
-    <dimen name="width_image_compare">80dp</dimen>
+    <dimen name="width_image_compare">100dp</dimen>
     <dimen name="height_image_compare">90dp</dimen>
 </resources>

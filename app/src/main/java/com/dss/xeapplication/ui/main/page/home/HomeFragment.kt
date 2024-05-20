@@ -12,7 +12,9 @@ import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.invisible
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
+import com.dss.xeapplication.base.extension.toastMsg
 import com.dss.xeapplication.base.extension.visible
+import com.dss.xeapplication.data.FirebaseStorage.listNotification
 import com.dss.xeapplication.databinding.FragmentHomeBinding
 import com.dss.xeapplication.model.BrandProvider
 import com.dss.xeapplication.model.Car
@@ -25,7 +27,8 @@ import com.dss.xeapplication.ui.detailcar.DetailCarFragment
 import com.dss.xeapplication.ui.diaglog.FilterBottomDialog
 import com.dss.xeapplication.ui.diaglog.UnlockRewardDialog
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
-import com.dss.xeapplication.ui.search.SearchActivity
+import com.dss.xeapplication.ui.notification.NotificationFragment
+import com.dss.xeapplication.ui.search.SearchFragment
 import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -173,7 +176,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         })
 
         binding.btnSearch.onAvoidDoubleClick {
-            startActivity(SearchActivity.newIntent(requireActivity()))
+            addFragment(SearchFragment.newInstance())
         }
 
         binding.btnTop.setOnClickListener {
@@ -183,6 +186,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
 
         binding.btnExitCompare.onAvoidDoubleClick {
             activityViewModel.updateStateCompare(MainViewModel.STATE_CLOSE_PICK_COMPARE)
+        }
+
+        binding.ivNotification.onAvoidDoubleClick {
+            if (listNotification.isEmpty()){
+                toastMsg(R.string.no_notification)
+                return@onAvoidDoubleClick
+            }
+            addFragment(NotificationFragment.newInstance())
+        }
+
+        binding.tvLocation.onAvoidDoubleClick {
+            toastMsg(R.string.comming_soon)
         }
     }
 

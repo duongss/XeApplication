@@ -82,4 +82,7 @@
     <string name="inSelect">Đang chọn</string>
     <string name="compare">So sánh</string>
     <string name="detail">Chi tiết</string>
+    <string name="no_internet">Không có kết nối mạng</string>
+    <string name="no_notification">Hiện không có thông báo</string>
+    <string name="notification">Thông báo</string>
 </resources>

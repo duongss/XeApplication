@@ -59,6 +59,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-analytics-ktx")
     implementation ("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-auth")
+    implementation ("com.google.firebase:firebase-database-ktx")
     implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     //in-app-update
     implementation ("com.google.android.play:app-update-ktx:2.1.0")
