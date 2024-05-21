@@ -23,7 +23,7 @@
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 android:layout_margin="@dimen/margin_main"
-                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintDimensionRatio="1.5:1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:riv_corner_radius="12dp" />
 

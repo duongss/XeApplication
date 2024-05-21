@@ -18,7 +18,6 @@ import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.model.Notification
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
-import com.google.firebase.database.getValue
 import com.google.firebase.storage.storage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
