@@ -127,7 +127,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         }
 
         backListener {
-            requireActivity().finish()
+            if (viewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE){
+                requireActivity().finish()
+            }else{
+                viewModel.updateStateCompare(MainViewModel.STATE_CLOSE_PICK_COMPARE)
+            }
         }
     }
 

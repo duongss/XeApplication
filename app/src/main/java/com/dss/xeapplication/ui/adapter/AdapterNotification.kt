@@ -20,8 +20,11 @@ class AdapterNotification() :
         position: Int,
         context: Context
     ) {
-        if (data.isShow == true){
-            binding.tvContent.text = data.content
+        if (data.show == Notification.SHOW){
+            binding.tvContent.text = buildString {
+                append(" - ")
+                append(data.content)
+            }
         }else{
             binding.root.gone()
         }

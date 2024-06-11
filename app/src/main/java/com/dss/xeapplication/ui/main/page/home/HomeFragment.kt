@@ -34,7 +34,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.FilterListener,ComparePreBottomDialog.PreCompareListener,UnlockRewardDialog.UnlockForFreeListener{
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.FilterListener,
+    ComparePreBottomDialog.PreCompareListener, UnlockRewardDialog.UnlockForFreeListener {
 
     override fun bindingView() = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -63,26 +64,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private fun initAdapterCar() {
         adapterCar =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
-                if (activityViewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE){
+                if (activityViewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE) {
                     InterstitialManager.show(requireActivity(), object : OnCompletedListener {
                         override fun onCompleted() {
                             addFragment(DetailCarFragment.newInstance(car))
                         }
                     })
-                }else{
+                } else {
                     activityViewModel.compareCarData.value?.let {
                         when (activityViewModel.stateCompare.value) {
                             MainViewModel.STATE_PICK_COMPARE_CAR_1 -> {
                                 activityViewModel.updateCar1(car)
 
                             }
+
                             MainViewModel.STATE_PICK_COMPARE_CAR_2 -> {
                                 activityViewModel.updateCar2(car)
                             }
                         }
 
                         adapterCar.syncSelected(it)
-                        if (it.car1!=null && it.car2!=null){
+                        if (it.car1 != null && it.car2 != null) {
                             showChildDialog(ComparePreBottomDialog.newInstance())
                         }
                     }
@@ -116,9 +118,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             adapterBrand.set(BrandProvider.listBrand)
         }
 
-        activityViewModel.stateCompare.observe(requireActivity()){
-            when(it){
-                MainViewModel.STATE_CLOSE_PICK_COMPARE->{
+        activityViewModel.stateCompare.observe(requireActivity()) {
+            when (it) {
+                MainViewModel.STATE_CLOSE_PICK_COMPARE -> {
                     adapterCar.inSelected(false)
                     binding.cslGroup.visible()
                     binding.lnGroupCompare.gone()
@@ -146,6 +148,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             showChildDialog(FilterBottomDialog.newInstance())
         }
 
+        binding.appCompatTextView3.onAvoidDoubleClick {
+
+        }
 
         binding.rcvCar.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -189,7 +194,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         }
 
         binding.ivNotification.onAvoidDoubleClick {
-            if (listNotification.isEmpty()){
+            if (listNotification.isEmpty()) {
                 toastMsg(R.string.no_notification)
                 return@onAvoidDoubleClick
             }
@@ -206,9 +211,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     }
 
     override fun onNext() {
-        if (SharedPref.isVip){
+        if (SharedPref.isVip) {
             onUnlockedFromUser()
-        }else{
+        } else {
             showChildDialog(UnlockRewardDialog.newInstance())
         }
     }

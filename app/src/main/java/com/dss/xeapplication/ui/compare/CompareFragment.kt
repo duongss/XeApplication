@@ -34,6 +34,8 @@ class CompareFragment : BaseFragment<FragmentCompareBinding>() {
         adapter = AdapterCompare()
         binding.rcvData.adapter = adapter
 
+        binding.tvNameCar1.isSelected = true
+        binding.tvNameCar2.isSelected = true
     }
 
 
