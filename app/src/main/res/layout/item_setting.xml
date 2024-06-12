@@ -22,13 +22,14 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv"
         android:layout_width="0dp"
-        android:textSize="14sp"
-        android:textColor="@color/color3"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_main"
-        tools:text="@string/rate_us"
+        android:textColor="@color/color3"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/rate_us" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@ import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
 import com.dss.xeapplication.base.extension.toastMsg
 import com.dss.xeapplication.base.extension.visible
+import com.dss.xeapplication.data.FirebaseStorage
 import com.dss.xeapplication.data.FirebaseStorage.listNotification
 import com.dss.xeapplication.databinding.FragmentHomeBinding
 import com.dss.xeapplication.model.BrandProvider
@@ -40,6 +41,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     override fun bindingView() = FragmentHomeBinding.inflate(layoutInflater)
 
     companion object {
+        const val LIST_FAV = 1
+        const val LIST_ALL = 2
+
         fun newInstance() = HomeFragment()
 
     }
@@ -51,6 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private val activityViewModel by activityViewModels<MainViewModel>()
 
     private var yList = 0
+    private var listMode = LIST_ALL
 
     override fun initConfig() {
         super.initConfig()
@@ -116,6 +121,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         viewModel.dataCars.observe(this) {
             adapterCar.set(it)
             adapterBrand.set(BrandProvider.listBrand)
+
+
+            if (FirebaseStorage.listCar.isEmpty()) {
+                binding.lnEmpty.visible()
+                binding.coordinator.invisible()
+            } else {
+                binding.coordinator.visible()
+                binding.lnEmpty.gone()
+            }
         }
 
         activityViewModel.stateCompare.observe(requireActivity()) {
@@ -148,7 +162,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             showChildDialog(FilterBottomDialog.newInstance())
         }
 
-        binding.appCompatTextView3.onAvoidDoubleClick {
+        binding.btnFav.onAvoidDoubleClick {
+            if (listMode == LIST_ALL) {
+                binding.btnFav.text = getString(R.string.danh_sach_luu)
+                listMode = LIST_FAV
+                adapterCar.set(FirebaseStorage.markList)
+
+                if (FirebaseStorage.markList.isEmpty()) {
+                    binding.lnEmptyList.visible()
+                } else {
+                    binding.lnEmptyList.gone()
+                }
+            } else {
+                binding.btnFav.text = getString(R.string.danh_sach_xe)
+                viewModel.initDataCars()
+                listMode = LIST_ALL
+                binding.lnEmptyList.gone()
+            }
 
         }
 

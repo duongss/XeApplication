@@ -3,6 +3,7 @@ package com.dss.xeapplication.data
 import android.util.Log
 import com.dss.xeapplication.App
 import com.dss.xeapplication.base.extension.internalFile
+import com.dss.xeapplication.base.network.NetworkHelper
 import com.dss.xeapplication.model.BrandProvider.ALL
 import com.dss.xeapplication.model.BrandProvider.AUDI
 import com.dss.xeapplication.model.BrandProvider.BMW
@@ -41,91 +42,100 @@ object FirebaseStorage {
 
         val context = App.appContext()
 
-        val f = context.internalFile()
-        if (f.exists() && f.isDirectory) {
-            f.deleteRecursively()
-        }
-
         val storage = Firebase.storage
         val storageRef = storage.reference
         val pathReference = storageRef.child(nameFileJsonCar)
         val database = Firebase.database.reference
-        val localFile = File.createTempFile("DataCar", "json", context.internalFile())
 
+        val fileData = File(context.internalFile(), nameFileJsonCar)
+        if (!NetworkHelper.isConnected() && fileData.exists()) {
+            handleFile(fileData, result)
+        } else {
+//            val localFile = File.createTempFile("DataCar", "json", context.internalFile())
 
-        database.get().addOnSuccessListener {
-            it.children.forEach {
-                val notification =  it.getValue(Notification::class.java)
-                notification?.let { s -> listNotification.add(s) }
+            database.get().addOnSuccessListener {
+                it.children.forEach {
+                    val notification = it.getValue(Notification::class.java)
+                    notification?.let { s -> listNotification.add(s) }
+                }
+
+            }.addOnFailureListener {
+                Log.e(TAG, "Error getting data", it)
             }
 
-        }.addOnFailureListener{
-            Log.e(TAG, "Error getting data", it)
+            pathReference.getFile(fileData).addOnSuccessListener {
+                handleFile(fileData, result)
+            }.addOnFailureListener {
+                handleFile(fileData, result)
+            }
         }
+    }
 
-        pathReference.getFile(localFile).addOnSuccessListener {
-            CoroutineScope(Dispatchers.IO).launch {
+    private fun handleFile(localFile: File, result: (Boolean) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            var isDone = true
+
+            try {
                 val jsonString = localFile.readText()
-
                 val collectionType = object : TypeToken<List<Car>>() {}.type
                 val cars: List<Car> = Gson().fromJson(jsonString, collectionType)
                 listCar = ArrayList(cars)
 
                 listCar.forEach {
-                    try {
-                        ALL.listCar.add(it)
+                    ALL.listCar.add(it)
 
-                        when(it.brand.lowercase(Locale.ROOT)){
-                            MITSUBISHI.name.name.lowercase(Locale.ROOT) ->{
-                                MITSUBISHI.listCar.add(it)
-                            }
-                            HONDA.name.name.lowercase(Locale.ROOT) ->{
-                                HONDA.listCar.add(it)
-                            }
-                            TOYOTA.name.name.lowercase(Locale.ROOT) ->{
-                                TOYOTA.listCar.add(it)
-                            }
-                            MAZDA.name.name.lowercase(Locale.ROOT) ->{
-                                MAZDA.listCar.add(it)
-                            }
-                            KIA.name.name.lowercase(Locale.ROOT) ->{
-                                KIA.listCar.add(it)
-                            }
-
-                            VINFAST.name.name.lowercase(Locale.ROOT) -> {
-                                VINFAST.listCar.add(it)
-                            }
-
-                            FORD.name.name.lowercase(Locale.ROOT) -> {
-                                FORD.listCar.add(it)
-                            }
-
-                            HUYNDAI.name.name.lowercase(Locale.ROOT) -> {
-                                HUYNDAI.listCar.add(it)
-                            }
-
-                            BMW.name.name.lowercase(Locale.ROOT) -> {
-                                BMW.listCar.add(it)
-                            }
-
-                            AUDI.name.name.lowercase(Locale.ROOT) -> {
-                                AUDI.listCar.add(it)
-                            }
+                    when (it.brand.lowercase(Locale.ROOT)) {
+                        MITSUBISHI.name.name.lowercase(Locale.ROOT) -> {
+                            MITSUBISHI.listCar.add(it)
                         }
-                    }catch (e:Exception){
 
+                        HONDA.name.name.lowercase(Locale.ROOT) -> {
+                            HONDA.listCar.add(it)
+                        }
+
+                        TOYOTA.name.name.lowercase(Locale.ROOT) -> {
+                            TOYOTA.listCar.add(it)
+                        }
+
+                        MAZDA.name.name.lowercase(Locale.ROOT) -> {
+                            MAZDA.listCar.add(it)
+                        }
+
+                        KIA.name.name.lowercase(Locale.ROOT) -> {
+                            KIA.listCar.add(it)
+                        }
+
+                        VINFAST.name.name.lowercase(Locale.ROOT) -> {
+                            VINFAST.listCar.add(it)
+                        }
+
+                        FORD.name.name.lowercase(Locale.ROOT) -> {
+                            FORD.listCar.add(it)
+                        }
+
+                        HUYNDAI.name.name.lowercase(Locale.ROOT) -> {
+                            HUYNDAI.listCar.add(it)
+                        }
+
+                        BMW.name.name.lowercase(Locale.ROOT) -> {
+                            BMW.listCar.add(it)
+                        }
+
+                        AUDI.name.name.lowercase(Locale.ROOT) -> {
+                            AUDI.listCar.add(it)
+                        }
                     }
                 }
-
-
+                Log.d(TAG, "handleFile: ${listCar.size}")
                 loadMarkFolder()
-                withContext(Dispatchers.Main){
-                    result(true)
-                }
+
+            } catch (e: Exception) {
+                isDone = false
             }
 
-        }.addOnFailureListener {
-            result(false)
+            withContext(Dispatchers.Main) {
+                result(isDone)
+            }
         }
     }
 

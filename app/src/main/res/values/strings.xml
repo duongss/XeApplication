@@ -14,7 +14,7 @@
     <string name="search_hint">Tìm kiếm tên hãng,loại xe</string>
     <string name="hang_xe">Hãng xe</string>
     <string name="more">Xem thêm</string>
-    <string name="danh_sach_xe">Danh sách lưu</string>
+    <string name="danh_sach_luu">Danh sách lưu</string>
     <string name="viet_nam">Việt Nam</string>
     <string name="model" translatable="false">Model</string>
     <string name="mitsubishi">Mitsubishi</string>
@@ -85,4 +85,16 @@
     <string name="no_internet">Không có kết nối mạng</string>
     <string name="no_notification">Hiện không có thông báo</string>
     <string name="notification">Thông báo</string>
+    <string name="danh_sach_xe">Danh sách</string>
+    <string name="no_data">Không có dữ liệu</string>
+    <string name="data_with_tax">Dự tính chi phí</string>
+    <string name="done">Xong</string>
+
+    <string name="listed_price">Giá niêm yết</string>
+    <string name="registration">Phí đăng ký</string>
+    <string name="license_plate">Phí biển số</string>
+    <string name="road_maintenance">Phí bảo trì đường bộ 1 năm</string>
+    <string name="civilLiability_insurance">Bảo hiểm trách nhiệm dân sự</string>
+    <string name="registration_certificateFee">Phí chứng nhận đăng ký</string>
+    <string name="price_sum">Tổng : %ss …</string>
 </resources>
