@@ -96,5 +96,6 @@
     <string name="road_maintenance">Phí bảo trì đường bộ 1 năm</string>
     <string name="civilLiability_insurance">Bảo hiểm trách nhiệm dân sự</string>
     <string name="registration_certificateFee">Phí chứng nhận đăng ký</string>
-    <string name="price_sum">Tổng : %ss …</string>
+    <string name="price_sum">Tổng : %s</string>
+    <string name="unit_price">Mệnh giá</string>
 </resources>
