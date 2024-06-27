@@ -1,7 +1,10 @@
 package com.dss.xeapplication.ui.main.page.home
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
@@ -42,9 +45,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     override fun bindingView() = FragmentHomeBinding.inflate(layoutInflater)
 
     companion object {
-        const val LIST_FAV = 1
-        const val LIST_ALL = 2
-
         fun newInstance() = HomeFragment()
 
     }
@@ -56,7 +56,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
     private val activityViewModel by activityViewModels<MainViewModel>()
 
     private var yList = 0
-    private var listMode = LIST_ALL
 
     override fun initConfig() {
         super.initConfig()
@@ -71,11 +70,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         adapterCar =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
                 if (activityViewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE) {
-                    InterstitialManager.show(requireActivity(), object : OnCompletedListener {
-                        override fun onCompleted() {
-                            addFragment(DetailCarFragment.newInstance(car))
-                        }
-                    })
+//                    InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+//                        override fun onCompleted() {
+//                            addFragment(DetailCarFragment.newInstance(car))
+//                        }
+//                    })
+                    addFragment(DetailCarFragment.newInstance(car))
                 } else {
                     activityViewModel.compareCarData.value?.let {
                         when (activityViewModel.stateCompare.value) {
@@ -102,6 +102,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         binding.rcvCar.adapter = adapterCar
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initAdapterBrand() {
         adapterBrand = AdapterBrand()
         binding.rcvBrand.adapter = adapterBrand
@@ -110,10 +111,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             viewModel.initDataCars(brand)
             adapterBrand.dataList.forEach {
                 it.isSelected = it == brand
+                adapterBrand.notifyDataSetChanged()
             }
             adapterBrand.notifyItemChanged(i)
         }
 
+        adapterBrand.set(BrandProvider.listBrand)
     }
 
     override fun initObserver() {
@@ -121,8 +124,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
 
         viewModel.dataCars.observe(this) {
             adapterCar.set(it)
-            adapterBrand.set(BrandProvider.listBrand)
-
 
             if (FirebaseStorage.listCar.isEmpty()) {
                 binding.lnEmpty.visible()
@@ -164,22 +165,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         }
 
         binding.btnFav.onAvoidDoubleClick {
-            if (listMode == LIST_ALL) {
+            if (viewModel.listMode == viewModel.LIST_ALL) {
                 binding.btnFav.text = getString(R.string.danh_sach_luu)
-                listMode = LIST_FAV
-                adapterCar.set(FirebaseStorage.markList)
+                viewModel.listMode = viewModel.LIST_FAV
 
-                if (FirebaseStorage.markList.isEmpty()) {
-                    binding.lnEmptyList.visible()
-                } else {
-                    binding.lnEmptyList.gone()
-                }
             } else {
                 binding.btnFav.text = getString(R.string.danh_sach_xe)
-                viewModel.initDataCars()
-                listMode = LIST_ALL
-                binding.lnEmptyList.gone()
+                viewModel.listMode = viewModel.LIST_ALL
             }
+            viewModel.initDataCars()
 
         }
 
@@ -190,24 +184,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
                 yList = dy
 
                 if (dy > 0) {
-                    activityViewModel.bottomHidden()
+                    binding.btnTop.gone()
                 } else if (dy < 0) {
-                    activityViewModel.bottomVisible()
+                    binding.btnTop.visible()
                 }
 
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+
+                if (pastVisibleItems + visibleItemCount >= totalItemCount) {
+                    activityViewModel.bottomHidden()
+                } else {
+                    activityViewModel.bottomVisible()
+                }
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                if (RecyclerView.SCROLL_STATE_IDLE == newState) {
-                    if (yList <= 0) {
-                        binding.btnTop.gone()
-                    } else {
-                        yList = 0
-                        binding.btnTop.visible()
-                    }
-                }
             }
         })
 
@@ -236,9 +233,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             addFragment(FeeFragment.newInstance())
         }
 
-        binding.tvLocation.onAvoidDoubleClick {
-            toastMsg(R.string.comming_soon)
-        }
+//        binding.tvLocation.onAvoidDoubleClick {
+//            toastMsg(R.string.comming_soon)
+//        }
     }
 
     override fun filterCall(sorter: Sorter) {

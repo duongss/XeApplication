@@ -51,12 +51,15 @@ object FirebaseStorage {
         if (!NetworkHelper.isConnected() && fileData.exists()) {
             handleFile(fileData, result)
         } else {
-//            val localFile = File.createTempFile("DataCar", "json", context.internalFile())
-
             database.get().addOnSuccessListener {
                 it.children.forEach {
-                    val notification = it.getValue(Notification::class.java)
-                    notification?.let { s -> listNotification.add(s) }
+                    try {
+                        val notification = it.getValue(Notification::class.java)
+                        notification?.let { s -> listNotification.add(s) }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 }
 
             }.addOnFailureListener {

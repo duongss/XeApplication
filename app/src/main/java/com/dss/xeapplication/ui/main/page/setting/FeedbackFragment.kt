@@ -14,7 +14,7 @@ import com.dss.xeapplication.databinding.FragmentFeedbackBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedbackFragment : BaseDialogFragment<FragmentFeedbackBinding>() {
+class FeedbackFragment : BaseFragment<FragmentFeedbackBinding>() {
     override fun bindingView() = FragmentFeedbackBinding.inflate(layoutInflater)
 
     companion object {
@@ -42,8 +42,8 @@ class FeedbackFragment : BaseDialogFragment<FragmentFeedbackBinding>() {
     }
 
     override fun initListener() {
-        binding.toolbar.btnBack.setOnClickListener {
-            dismiss()
+        backListener(binding.toolbar.btnBack) {
+            removeSelf()
         }
 
         binding.btnSendFeedback.onAvoidDoubleClick {

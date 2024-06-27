@@ -32,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/ic_down"
             android:drawablePadding="6dp"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/tv1"
@@ -188,6 +187,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cslList"
             android:layout_width="match_parent"
+            android:layout_marginBottom="120dp"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -202,7 +202,7 @@
                 android:gravity="center_vertical"
                 android:paddingVertical="2dp"
                 android:text="@string/danh_sach_xe"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivSort"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/ivSort" />
@@ -226,7 +226,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="60dp"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"

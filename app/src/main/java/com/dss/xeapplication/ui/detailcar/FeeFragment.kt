@@ -27,7 +27,7 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
 
     override fun initConfig() {
         super.initConfig()
-
+        binding.toolbar.title.text = getString(R.string.data_with_tax)
         val adapter = FeeAdapter(requireContext(), LocationFee.listLocationFee) { it, pos ->
             handleFee(it, pos)
 
@@ -55,7 +55,7 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
     }
 
     override fun initListener() {
-        backListener(binding.btnClose) {
+        backListener(binding.toolbar.btnBack) {
             removeSelf()
         }
 

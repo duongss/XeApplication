@@ -5,38 +5,13 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_width="match_parent"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tvTitleGroup"
-            style="@style/TextFeature1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/area_size_default"
-            android:layout_marginHorizontal="50dp"
-            android:gravity="center"
-            android:text="@string/data_with_tax"
-            android:textSize="18sp" />
-
-        <FrameLayout
-            android:id="@+id/btn_close"
-            android:layout_width="@dimen/area_size_default"
-            android:layout_height="@dimen/area_size_default"
-            android:background="?selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/ivClose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_close"
-                app:tint="@color/black" />
-        </FrameLayout>
-
-    </FrameLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_simple" />
 
 
     <LinearLayout
@@ -62,7 +37,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?selectableItemBackground"
         android:paddingHorizontal="@dimen/margin_main">
 
         <androidx.appcompat.widget.AppCompatTextView

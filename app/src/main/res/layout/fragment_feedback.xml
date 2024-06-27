@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -21,24 +21,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent"
             android:paddingTop="16dp">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edt_feedback"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginBottom="80dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="28dp"
                 android:background="@drawable/bg_border_4"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/color7"
                 android:gravity="top"
                 android:hint="@string/comment_issue"
                 android:paddingHorizontal="16dp"
-                android:paddingVertical="10dp"
+                android:paddingVertical="20dp"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/btn_send_feedback"
+                app:layout_constraintBottom_toTopOf="@+id/btn_send_feedback"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

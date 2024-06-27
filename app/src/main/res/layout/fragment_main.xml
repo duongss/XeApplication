@@ -15,7 +15,7 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="66dp"
         android:layout_gravity="bottom"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
@@ -38,8 +38,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivHome"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_centerHorizontal="true"
                     android:scaleType="center"
                     app:srcCompat="@drawable/ac_home" />
@@ -47,6 +47,7 @@
                 <com.dss.xeapplication.ui.custom.GradientTextView
                     android:id="@+id/tvHome"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ivHome"
                     style="@style/TextFeature3"
@@ -65,9 +66,9 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivTool"
-                    android:layout_width="24dp"
+                    android:layout_width="34dp"
                     android:scaleType="center"
-                    android:layout_height="24dp"
+                    android:layout_height="34dp"
                     android:layout_centerHorizontal="true"
                     app:srcCompat="@drawable/ac_tool" />
 
@@ -79,6 +80,7 @@
                     style="@style/TextFeature3"
                     android:layout_marginHorizontal="24dp"
                     android:layout_centerHorizontal="true"
+                    android:visibility="gone"
                     android:layout_marginTop="6dp"
                     android:text="@string/setting" />
             </RelativeLayout>
@@ -89,8 +91,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCompare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:contentDescription="@string/app_name"
         app:elevation="0dp"
         android:foreground="@drawable/ic_compare"

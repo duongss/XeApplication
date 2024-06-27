@@ -87,7 +87,7 @@
     <string name="notification">Thông báo</string>
     <string name="danh_sach_xe">Danh sách</string>
     <string name="no_data">Không có dữ liệu</string>
-    <string name="data_with_tax">Dự tính chi phí</string>
+    <string name="data_with_tax">Dự tính chi phí phụ</string>
     <string name="done">Xong</string>
 
     <string name="listed_price">Giá niêm yết</string>

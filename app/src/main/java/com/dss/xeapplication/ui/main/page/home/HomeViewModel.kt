@@ -27,8 +27,14 @@ class HomeViewModel @Inject constructor(
     val carRepository: CarRepository
 ) : BaseViewModel(savedStateHandle), HomeIf {
 
+    val LIST_ALL = 1
+    val LIST_FAV = 2
+
     val dataCars = MutableLiveData<ArrayList<Car>>()
     var brandSelect = BrandProvider.ALL
+    var listMode = LIST_ALL
+
+
 
     init {
         if (BrandProvider.ALL.listCar.isEmpty()) {
@@ -46,7 +52,7 @@ class HomeViewModel @Inject constructor(
         }
         showLoading()
         brandSelect = brand
-        val listData = ArrayList(brand.listCar)
+        val listData = if (listMode == LIST_FAV) ArrayList(brand.listCar.filter { it.isMark })  else ArrayList(brand.listCar)
         val filter = SharedPref.sorterLocal
 
 

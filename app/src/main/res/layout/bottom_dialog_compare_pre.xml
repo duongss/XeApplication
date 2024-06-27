@@ -7,12 +7,22 @@
     android:layout_height="wrap_content">
 
 
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        style="@style/TextFeature1"
+        android:layout_height="wrap_content"
+        android:text="@string/compare_select_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/lnGroup"
+        app:layout_constraintTop_toBottomOf="@+id/tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/margin_main"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginVertical="@dimen/margin_main">
 
         <RelativeLayout
             android:id="@+id/rlCar1"

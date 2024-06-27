@@ -52,7 +52,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                 }
 
                 SettingPProvider.FEEDBACK_CAR -> {
-                    showChildDialog(FeedbackFragment.newInstance())
+                    addFragment(FeedbackFragment.newInstance())
                 }
             }
         }

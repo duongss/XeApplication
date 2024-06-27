@@ -205,12 +205,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         val fadeIn1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 0f, 1f)
         fadeIn1.duration = durationCloseViewMode
 
+        val fadeIn2 = ObjectAnimator.ofFloat(binding.btnCompare, "alpha", 0f, 1f)
+        fadeIn2.duration = durationCloseViewMode
+
         val animatorSet = AnimatorSet()
-        animatorSet.playTogether(translationYAnimator1, fadeIn1)
+        animatorSet.playTogether(translationYAnimator1, fadeIn1,fadeIn2)
 
         animatorSet.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
                 binding.bottomAppBar.visible()
+                binding.btnCompare.visible()
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -239,8 +243,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         val fadeOut1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 1f, 0f)
         fadeOut1.duration = durationViewMode
 
+        val fadeOut2 = ObjectAnimator.ofFloat(binding.btnCompare, "alpha", 1f, 0f)
+        fadeOut2.duration = durationViewMode
+
         val animatorSet = AnimatorSet()
-        animatorSet.playTogether(translationYAnimator1, fadeOut1)
+        animatorSet.playTogether(translationYAnimator1, fadeOut1,fadeOut2)
 
         animatorSet.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
@@ -249,6 +256,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
             override fun onAnimationEnd(animation: Animator) {
                 binding.bottomAppBar.gone()
+                binding.btnCompare.gone()
             }
 
             override fun onAnimationCancel(animation: Animator) {}
