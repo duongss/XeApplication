@@ -112,12 +112,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         adapter =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
                 requireActivity().hideSoftKeyboard(searchEdit)
-//                InterstitialManager.show(requireActivity(), object : OnCompletedListener {
-//                    override fun onCompleted() {
-//                        addFragment(DetailCarFragment.newInstance(car))
-//                    }
-//                })
-                addFragment(DetailCarFragment.newInstance(car))
+                InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+                    override fun onCompleted() {
+                        addFragment(DetailCarFragment.newInstance(car))
+                    }
+                })
             }, onItemMark = { car: Car, i: Int ->
                 viewModel.updateMark(car)
             })

@@ -70,12 +70,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         adapterCar =
             AdapterCar(onItemSelect = { car: Car, i: Int ->
                 if (activityViewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE) {
-//                    InterstitialManager.show(requireActivity(), object : OnCompletedListener {
-//                        override fun onCompleted() {
-//                            addFragment(DetailCarFragment.newInstance(car))
-//                        }
-//                    })
-                    addFragment(DetailCarFragment.newInstance(car))
+                    InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+                        override fun onCompleted() {
+                            addFragment(DetailCarFragment.newInstance(car))
+                        }
+                    })
                 } else {
                     activityViewModel.compareCarData.value?.let {
                         when (activityViewModel.stateCompare.value) {

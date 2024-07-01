@@ -2,6 +2,7 @@ package com.dss.xeapplication.data
 
 import android.util.Log
 import com.dss.xeapplication.App
+import com.dss.xeapplication.base.ads.Ads
 import com.dss.xeapplication.base.extension.internalFile
 import com.dss.xeapplication.base.network.NetworkHelper
 import com.dss.xeapplication.model.BrandProvider.ALL
@@ -54,12 +55,23 @@ object FirebaseStorage {
             database.get().addOnSuccessListener {
                 it.children.forEach {
                     try {
-                        val notification = it.getValue(Notification::class.java)
-                        notification?.let { s -> listNotification.add(s) }
+                        when(it.key){
+                            "Notification"->{
+                                it.children.forEach {
+                                    val notification = it.getValue(Notification::class.java)
+                                    notification?.let { s -> listNotification.add(s) }
+                                }
+                            }
+                            "isNotShowAds" ->{
+                                Ads.isShowFullScreen = it.value as Boolean
+                            }
+                            else ->{
+
+                            }
+                        }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-
                 }
 
             }.addOnFailureListener {
