@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,91 +10,93 @@
         android:id="@+id/vpData"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_above="@+id/bottom"
+        android:layout_alignParentTop="true"
+        android:layout_height="0dp" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lnGroup"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_gravity="bottom"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:fabAlignmentMode="center"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleVerticalOffset="0dp">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/btnHome"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:gravity="center_vertical">
 
-            <RelativeLayout
-                android:id="@+id/btnHome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivHome"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ac_home" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivHome"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="center"
-                    app:srcCompat="@drawable/ac_home" />
+            <com.dss.xeapplication.ui.custom.GradientTextView
+                android:id="@+id/tvHome"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivHome"
+                style="@style/TextFeature3"
+                android:layout_marginHorizontal="24dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="6dp"
+                android:text="@string/home" />
+        </RelativeLayout>
 
-                <com.dss.xeapplication.ui.custom.GradientTextView
-                    android:id="@+id/tvHome"
-                    android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ivHome"
-                    style="@style/TextFeature3"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/home" />
-            </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/btnTool"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
 
-            <RelativeLayout
-                android:id="@+id/btnTool"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivTool"
+                android:layout_width="34dp"
+                android:scaleType="center"
+                android:layout_height="34dp"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ac_tool" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivTool"
-                    android:layout_width="34dp"
-                    android:scaleType="center"
-                    android:layout_height="34dp"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@drawable/ac_tool" />
+            <com.dss.xeapplication.ui.custom.GradientTextView
+                android:id="@+id/tvTool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivTool"
+                style="@style/TextFeature3"
+                android:layout_marginHorizontal="24dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:layout_marginTop="6dp"
+                android:text="@string/setting" />
+        </RelativeLayout>
 
-                <com.dss.xeapplication.ui.custom.GradientTextView
-                    android:id="@+id/tvTool"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ivTool"
-                    style="@style/TextFeature3"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="gone"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/setting" />
-            </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.1"
+        android:layout_above="@+id/bottom"
+        android:background="@color/black" />
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:background="@color/white"
+        android:id="@+id/bottom"
+        app:itemTextColor="@color/color2"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"
+        android:layout_width="match_parent"
+        android:layout_height="62dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCompare"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@string/app_name"
-        app:elevation="0dp"
-        android:foreground="@drawable/ic_compare"
-        app:layout_anchor="@id/bottomAppBar" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</RelativeLayout>

@@ -79,7 +79,8 @@
     <string name="next">Tiếp theo</string>
     <string name="compare_select_mode" >Chọn xe để so sánh</string>
     <string name="exit_mode_compare">Hủy chọn</string>
-    <string name="inSelect">Đang chọn</string>
+    <string name="inSelect">Đã chọn</string>
+    <string name="inNonSelect">Chưa chọn</string>
     <string name="compare">So sánh</string>
     <string name="detail">Chi tiết</string>
     <string name="no_internet">Không có kết nối mạng</string>
@@ -98,4 +99,5 @@
     <string name="registration_certificateFee">Phí chứng nhận đăng ký</string>
     <string name="price_sum">Tổng : %s</string>
     <string name="unit_price">Mệnh giá</string>
+    <string name="selection">Lựa chọn</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.dss.xeapplication.ui.main.page.home
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +27,6 @@ import com.dss.xeapplication.ui.adapter.AdapterCar
 import com.dss.xeapplication.ui.compare.CompareFragment
 import com.dss.xeapplication.ui.compare.ComparePreBottomDialog
 import com.dss.xeapplication.ui.detailcar.DetailCarFragment
-import com.dss.xeapplication.ui.detailcar.FeeFragment
 import com.dss.xeapplication.ui.diaglog.FilterBottomDialog
 import com.dss.xeapplication.ui.diaglog.UnlockRewardDialog
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
@@ -229,7 +227,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
         }
 
         binding.btnFee.onAvoidDoubleClick {
-            addFragment(FeeFragment.newInstance())
+            showChildDialog(ComparePreBottomDialog.newInstance())
         }
 
 //        binding.tvLocation.onAvoidDoubleClick {

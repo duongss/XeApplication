@@ -1,27 +1,25 @@
 package com.dss.xeapplication.ui.main
 
 
-import android.animation.Animator
 import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.app.Activity.RESULT_OK
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ViewPagerAdapter
 import com.dss.xeapplication.base.extension.addFragment
-import com.dss.xeapplication.base.extension.gone
-import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.showChildDialog
-import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentMainBinding
 import com.dss.xeapplication.ui.compare.CompareFragment
 import com.dss.xeapplication.ui.compare.ComparePreBottomDialog
 import com.dss.xeapplication.ui.diaglog.UnlockRewardDialog
 import com.dss.xeapplication.ui.diaglog.UpgradeVersionDialog
+import com.dss.xeapplication.ui.main.page.fee.FeeFragment
 import com.dss.xeapplication.ui.main.page.home.HomeFragment
+import com.dss.xeapplication.ui.main.page.selection.SelectionFragment
 import com.dss.xeapplication.ui.main.page.setting.SettingFragment
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -34,7 +32,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.OnUpdateAppListener,ComparePreBottomDialog.PreCompareListener,UnlockRewardDialog.UnlockForFreeListener {
+class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.OnUpdateAppListener,
+    ComparePreBottomDialog.PreCompareListener, UnlockRewardDialog.UnlockForFreeListener {
     override fun bindingView() = FragmentMainBinding.inflate(layoutInflater)
 
 
@@ -46,8 +45,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
     companion object {
         const val PAGE_HOME = 0
-
-        const val PAGE_TOOL = 1
+        const val PAGE_SELECTION = 1
+        const val PAGE_FEE = 2
+        const val PAGE_SETTING = 3
 
         fun newInstance() = MainFragment()
     }
@@ -80,7 +80,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
 
     private fun initPage() {
         arrayTabFragment = arrayListOf(
-            HomeFragment.newInstance(), SettingFragment.newInstance()
+            HomeFragment.newInstance(),
+            SelectionFragment.newInstance(),
+            FeeFragment.newInstance(),
+            SettingFragment.newInstance()
         )
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager, lifecycle, arrayTabFragment
@@ -95,6 +98,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         binding.vpData.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                binding.bottom.selectedItemId = position
                 when (position) {
                     PAGE_HOME -> {
                         binding.ivHome.isActivated = true
@@ -103,7 +107,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
                         binding.tvTool.nclicked()
                     }
 
-                    PAGE_TOOL -> {
+                    PAGE_SETTING -> {
                         binding.ivHome.isActivated = false
                         binding.ivTool.isActivated = true
                         binding.tvTool.clicked()
@@ -119,17 +123,38 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
         }
 
         binding.btnTool.setOnClickListener {
-            viewModel.setCurrentPage(PAGE_TOOL)
+            viewModel.setCurrentPage(PAGE_SETTING)
         }
 
-        binding.btnCompare.onAvoidDoubleClick {
-            showChildDialog(ComparePreBottomDialog.newInstance())
+//        binding.btnCompare.onAvoidDoubleClick {
+//            showChildDialog(ComparePreBottomDialog.newInstance())
+//        }
+
+        binding.bottom.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_home -> {
+                    viewModel.setCurrentPage(PAGE_HOME)
+                }
+
+                R.id.nav_fee -> {
+                    viewModel.setCurrentPage(PAGE_FEE)
+                }
+
+                R.id.nav_selection -> {
+                    viewModel.setCurrentPage(PAGE_SELECTION)
+                }
+
+                R.id.nav_setting -> {
+                    viewModel.setCurrentPage(PAGE_SETTING)
+                }
+            }
+            return@setOnItemSelectedListener true
         }
 
         backListener {
-            if (viewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE){
+            if (viewModel.stateCompare.value == MainViewModel.STATE_CLOSE_PICK_COMPARE) {
                 requireActivity().finish()
-            }else{
+            } else {
                 viewModel.updateStateCompare(MainViewModel.STATE_CLOSE_PICK_COMPARE)
             }
         }
@@ -198,35 +223,35 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
             return
         }
 
-        val translationYAnimator1 =
-            ObjectAnimator.ofFloat(binding.bottomAppBar, "translationY", 300f, 0f)
-        translationYAnimator1.duration = durationCloseViewMode
-
-        val fadeIn1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 0f, 1f)
-        fadeIn1.duration = durationCloseViewMode
-
-        val fadeIn2 = ObjectAnimator.ofFloat(binding.btnCompare, "alpha", 0f, 1f)
-        fadeIn2.duration = durationCloseViewMode
-
+//        val translationYAnimator1 =
+//            ObjectAnimator.ofFloat(binding.bottomAppBar, "translationY", 300f, 0f)
+//        translationYAnimator1.duration = durationCloseViewMode
+//
+//        val fadeIn1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 0f, 1f)
+//        fadeIn1.duration = durationCloseViewMode
+//
+//        val fadeIn2 = ObjectAnimator.ofFloat(binding.btnCompare, "alpha", 0f, 1f)
+//        fadeIn2.duration = durationCloseViewMode
+//
         val animatorSet = AnimatorSet()
-        animatorSet.playTogether(translationYAnimator1, fadeIn1,fadeIn2)
-
-        animatorSet.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animation: Animator) {
-                binding.bottomAppBar.visible()
-                binding.btnCompare.visible()
-            }
-
-            override fun onAnimationEnd(animation: Animator) {
-                isViewMode = false
-            }
-
-            override fun onAnimationCancel(animation: Animator) {
-            }
-
-            override fun onAnimationRepeat(animation: Animator) {
-            }
-        })
+//        animatorSet.playTogether(translationYAnimator1, fadeIn1,fadeIn2)
+//
+//        animatorSet.addListener(object : Animator.AnimatorListener {
+//            override fun onAnimationStart(animation: Animator) {
+////                binding.bottomAppBar.visible()
+////                binding.btnCompare.visible()
+//            }
+//
+//            override fun onAnimationEnd(animation: Animator) {
+//                isViewMode = false
+//            }
+//
+//            override fun onAnimationCancel(animation: Animator) {
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animator) {
+//            }
+//        })
 
         animatorSet.start()
     }
@@ -236,40 +261,40 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), UpgradeVersionDialog.O
             return
         }
 
-        val translationYAnimator1 =
-            ObjectAnimator.ofFloat(binding.bottomAppBar, "translationY", 0f, 300f)
-        translationYAnimator1.duration = durationViewMode
-
-        val fadeOut1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 1f, 0f)
-        fadeOut1.duration = durationViewMode
-
-        val fadeOut2 = ObjectAnimator.ofFloat(binding.btnCompare, "alpha", 1f, 0f)
-        fadeOut2.duration = durationViewMode
-
+//        val translationYAnimator1 =
+//            ObjectAnimator.ofFloat(binding.bottomAppBar, "translationY", 0f, 300f)
+//        translationYAnimator1.duration = durationViewMode
+//
+//        val fadeOut1 = ObjectAnimator.ofFloat(binding.bottomAppBar, "alpha", 1f, 0f)
+//        fadeOut1.duration = durationViewMode
+//
+//        val fadeOut2 = ObjectAnimator.ofFloat(binding.btnCompare, "alpha", 1f, 0f)
+//        fadeOut2.duration = durationViewMode
+//
         val animatorSet = AnimatorSet()
-        animatorSet.playTogether(translationYAnimator1, fadeOut1,fadeOut2)
-
-        animatorSet.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animation: Animator) {
-                isViewMode = true
-            }
-
-            override fun onAnimationEnd(animation: Animator) {
-                binding.bottomAppBar.gone()
-                binding.btnCompare.gone()
-            }
-
-            override fun onAnimationCancel(animation: Animator) {}
-            override fun onAnimationRepeat(animation: Animator) {}
-        })
+//        animatorSet.playTogether(translationYAnimator1, fadeOut1,fadeOut2)
+//
+//        animatorSet.addListener(object : Animator.AnimatorListener {
+//            override fun onAnimationStart(animation: Animator) {
+//                isViewMode = true
+//            }
+//
+//            override fun onAnimationEnd(animation: Animator) {
+//                binding.bottomAppBar.gone()
+//                binding.btnCompare.gone()
+//            }
+//
+//            override fun onAnimationCancel(animation: Animator) {}
+//            override fun onAnimationRepeat(animation: Animator) {}
+//        })
 
         animatorSet.start()
     }
 
     override fun onNext() {
-        if (SharedPref.isVip){
+        if (SharedPref.isVip) {
             onUnlockedFromUser()
-        }else{
+        } else {
             showChildDialog(UnlockRewardDialog.newInstance())
         }
     }

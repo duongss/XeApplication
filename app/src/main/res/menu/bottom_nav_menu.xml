@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_inactive"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/nav_selection"
+        android:icon="@drawable/ac_home"
+        android:title="@string/selection" />
+    <item
+        android:id="@+id/nav_fee"
+        android:icon="@drawable/ac_home"
+        android:title="@string/compare" />
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/ic_tool_inactive"
+        android:title="@string/setting" />
+</menu>

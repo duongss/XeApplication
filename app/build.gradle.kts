@@ -53,7 +53,7 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'")
 
     //ads
-    implementation ("com.google.android.gms:play-services-ads:23.0.0")
+    implementation("com.google.android.gms:play-services-ads:23.2.0")
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
     implementation ("com.google.firebase:firebase-core:21.1.1")

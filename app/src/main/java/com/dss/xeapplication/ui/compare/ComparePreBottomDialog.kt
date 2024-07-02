@@ -8,7 +8,6 @@ import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseBottomSheetDialogFragment
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.databinding.BottomDialogComparePreBinding
-import com.dss.xeapplication.ui.diaglog.UnlockRewardDialog
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,7 +57,7 @@ class ComparePreBottomDialog : BaseBottomSheetDialogFragment<BottomDialogCompare
                 }
             }?:let {
                 Glide.with(this).load(R.drawable.ic_add).into(binding.ivCar1)
-                binding.tvNameCar1.text = getString(R.string.inSelect)
+                binding.tvNameCar1.text = getString(R.string.inNonSelect)
             }
 
             it.car2?.let {
@@ -70,7 +69,7 @@ class ComparePreBottomDialog : BaseBottomSheetDialogFragment<BottomDialogCompare
                 }
             }?:let {
                 Glide.with(this).load(R.drawable.ic_add).into(binding.ivCar2)
-                binding.tvNameCar2.text = getString(R.string.inSelect)
+                binding.tvNameCar2.text = getString(R.string.inNonSelect)
             }
         }
     }

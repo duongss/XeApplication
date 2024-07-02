@@ -1,9 +1,10 @@
-package com.dss.xeapplication.ui.detailcar
+package com.dss.xeapplication.ui.main.page.fee
 
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.ListPopupWindow
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
+import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.removeSelf
 import com.dss.xeapplication.base.extension.toCurrencyFormat
@@ -28,6 +29,7 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
     override fun initConfig() {
         super.initConfig()
         binding.toolbar.title.text = getString(R.string.data_with_tax)
+        binding.toolbar.btnBack.gone()
         val adapter = FeeAdapter(requireContext(), LocationFee.listLocationFee) { it, pos ->
             handleFee(it, pos)
 
