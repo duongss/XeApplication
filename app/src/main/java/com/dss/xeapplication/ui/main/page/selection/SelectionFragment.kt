@@ -22,17 +22,13 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
 
     override fun initConfig() {
         super.initConfig()
-        binding.toolbar.title.text = getString(R.string.data_with_tax)
+        binding.toolbar.title.text = getString(R.string.selection)
         binding.toolbar.btnBack.gone()
 
     }
 
     override fun initListener() {
         backListener(binding.toolbar.btnBack) {
-            removeSelf()
-        }
-
-        binding.btnDone.onAvoidDoubleClick {
             removeSelf()
         }
     }

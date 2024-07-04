@@ -100,4 +100,5 @@
     <string name="price_sum">Tổng : %s</string>
     <string name="unit_price">Mệnh giá</string>
     <string name="selection">Lựa chọn</string>
+    <string name="fee">Chi phí</string>
 </resources>

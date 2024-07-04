@@ -226,7 +226,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             addFragment(NotificationFragment.newInstance())
         }
 
-        binding.btnFee.onAvoidDoubleClick {
+        binding.btnCompare.onAvoidDoubleClick {
             showChildDialog(ComparePreBottomDialog.newInstance())
         }
 

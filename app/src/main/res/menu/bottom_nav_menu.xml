@@ -6,12 +6,12 @@
         android:title="@string/home" />
     <item
         android:id="@+id/nav_selection"
-        android:icon="@drawable/ac_home"
+        android:icon="@drawable/ic_selection_category"
         android:title="@string/selection" />
     <item
         android:id="@+id/nav_fee"
-        android:icon="@drawable/ac_home"
-        android:title="@string/compare" />
+        android:icon="@drawable/ic_fee_category"
+        android:title="@string/fee" />
     <item
         android:id="@+id/nav_setting"
         android:icon="@drawable/ic_tool_inactive"

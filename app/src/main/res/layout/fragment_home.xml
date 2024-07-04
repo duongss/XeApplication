@@ -61,13 +61,13 @@
             android:paddingHorizontal="10dp"
             android:text="@string/search_hint"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnFee"
-            app:layout_constraintEnd_toStartOf="@+id/btnFee"
+            app:layout_constraintBottom_toBottomOf="@+id/btnCompare"
+            app:layout_constraintEnd_toStartOf="@+id/btnCompare"
             app:layout_constraintStart_toStartOf="@+id/tvLocation"
-            app:layout_constraintTop_toTopOf="@+id/btnFee" />
+            app:layout_constraintTop_toTopOf="@+id/btnCompare" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnFee"
+            android:id="@+id/btnCompare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
