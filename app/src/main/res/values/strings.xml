@@ -101,4 +101,13 @@
     <string name="unit_price">Mệnh giá</string>
     <string name="selection">Lựa chọn</string>
     <string name="fee">Chi phí</string>
+    <string name="car_type">Loại xe</string>
+    <string name="type">Loại xe</string>
+    <string name="oil_or_gas">Dầu hoặc xăng</string>
+    <string name="hybrid">hybrid</string>
+    <string name="electric">Điện</string>
+    <string name="price_lever">Mức giá</string>
+    <string name="low">Thấp</string>
+    <string name="medium">Vừa</string>
+    <string name="high">Đầy đủ</string>
 </resources>
