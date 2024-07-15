@@ -5,6 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseViewModel
+import com.dss.xeapplication.data.FirebaseStorage
 import com.dss.xeapplication.data.respository.CarRepository
 import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.model.CompareCarData
@@ -228,5 +229,24 @@ class MainViewModel @Inject constructor(
         if (compareCarData.value?.car1 == null){
             stateCompare.value = STATE_PICK_COMPARE_CAR_1
         }
+    }
+
+    val listConvenient = listOf(R.string.low,R.string.medium,R.string.high)
+    val listTypeFuel = listOf(R.string.oil_or_gas,R.string.electric,R.string.hybrid)
+    val listBottomType = listOf(R.string.bottom_high,R.string.bottom_low)
+    val listSeat = FirebaseStorage.listCar.map { it.numOfSeats }.toSet().sortedDescending()
+    fun thinkData(
+        checkedChipConvenient: Int,
+        checkedChipFuel: Int,
+        checkedChipSeat: Int,
+        checkedChipBottom: Int,
+        price: String
+    ) = viewModelScope.launch(Dispatchers.IO) {
+         val resultConvenient = listConvenient[checkedChipConvenient]
+         val resultFuel = listTypeFuel[checkedChipFuel]
+         val resultBottom = listBottomType[checkedChipBottom]
+         val resultSeat = listSeat[checkedChipSeat]
+
+
     }
 }

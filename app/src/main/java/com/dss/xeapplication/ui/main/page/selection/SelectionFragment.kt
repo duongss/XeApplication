@@ -1,13 +1,14 @@
 package com.dss.xeapplication.ui.main.page.selection
 
+import androidx.fragment.app.activityViewModels
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.removeSelf
-import com.dss.xeapplication.data.FirebaseStorage
 import com.dss.xeapplication.databinding.ChipfilterBinding
 import com.dss.xeapplication.databinding.FragmentSelectionBinding
+import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
 
     override fun bindingView() = FragmentSelectionBinding.inflate(layoutInflater)
+
+    private val viewModel by activityViewModels<MainViewModel>()
 
     companion object {
         fun newInstance(): SelectionFragment {
@@ -31,33 +34,42 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
         initChipFuel()
         initChipConvenient()
         initChipSeat()
+        initChipBottom()
     }
 
     private fun initChipConvenient() {
-        listOf(R.string.low,R.string.medium,R.string.high).forEach {
+        viewModel.listConvenient.forEach {
             val chip = createChip(it)
-            binding.chipGroupEngine.addView(chip)
+            binding.chipGroupConvenient.addView(chip)
         }
     }
+
     private fun initChipSeat() {
-        FirebaseStorage.listCar.map { it.numOfSeats }.toSet().forEach {
+        viewModel.listSeat.forEach {
             val chip = createChip(it.toString())
             binding.chipGroupSeat.addView(chip)
         }
     }
 
     private fun initChipFuel() {
-        listOf(R.string.oil_or_gas,R.string.electric,R.string.hybrid).forEach {
+        viewModel.listTypeFuel.forEach {
             val chip = createChip(it)
             binding.chipGroupFuel.addView(chip)
         }
     }
 
-    private fun createChip(t:Int): Chip {
-       return createChip(getString(t))
+    private fun initChipBottom() {
+        viewModel.listBottomType.forEach {
+            val chip = createChip(it)
+            binding.chipBottom.addView(chip)
+        }
     }
 
-    private fun createChip(str:String) : Chip {
+    private fun createChip(t: Int): Chip {
+        return createChip(getString(t))
+    }
+
+    private fun createChip(str: String): Chip {
         val chip = ChipfilterBinding.inflate(layoutInflater).root
         chip.apply {
             text = str
@@ -73,7 +85,13 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
         }
 
         binding.btnSet.onAvoidDoubleClick {
-
+            viewModel.thinkData(
+                binding.chipGroupConvenient.checkedChipId,
+                binding.chipGroupFuel.checkedChipId,
+                binding.chipGroupSeat.checkedChipId,
+                binding.chipBottom.checkedChipId,
+                binding.edtPrice.text.toString()
+            )
         }
     }
 }

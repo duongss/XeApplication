@@ -110,4 +110,8 @@
     <string name="low">Thấp</string>
     <string name="medium">Vừa</string>
     <string name="high">Đầy đủ</string>
+    <string name="bottom_car">Kiểu gầm xe</string>
+    <string name="bottom_high">Gầm cao</string>
+    <string name="bottom_low">Gầm thấp</string>
+    <string name="convenient">Tiện nghi</string>
 </resources>

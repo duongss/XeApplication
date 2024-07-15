@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -14,109 +14,137 @@
         layout="@layout/layout_toolbar_simple" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/margin_main">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_main"
-            android:text="@string/fuelType"
-            android:textColor="@color/color3"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/margin_main">
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_marginTop="10dp"
-            android:id="@+id/chipGroupFuel"
-            android:layout_width="0dp"
-            app:singleSelection="true"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv1" />
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/fuelType"
+                android:textColor="@color/color3"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_main"
-            android:text="@string/transmissionType"
-            android:textColor="@color/color3"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroupFuel" />
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="10dp"
+                android:id="@+id/chipGroupFuel"
+                android:layout_width="0dp"
+                app:singleSelection="true"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_marginTop="10dp"
-            android:id="@+id/chipGroupEngine"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:singleSelection="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv2" />
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/convenient"
+                android:textColor="@color/color3"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupFuel" />
 
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_main"
-            android:text="@string/numOfSeats"
-            android:textColor="@color/color3"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroupEngine" />
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="10dp"
+                android:id="@+id/chipGroupConvenient"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:layout_marginTop="10dp"
-            android:id="@+id/chipGroupSeat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:singleSelection="true"
-            app:layout_constraintTop_toBottomOf="@+id/tv3" />
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/numOfSeats"
+                android:textColor="@color/color3"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupConvenient" />
 
-        <TextView
-            android:id="@+id/tv4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_main"
-            android:text="@string/price_lever"
-            android:textColor="@color/color3"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroupSeat" />
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="10dp"
+                android:id="@+id/chipGroupSeat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:singleSelection="true"
+                app:layout_constraintTop_toBottomOf="@+id/tv3" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            app:layout_constraintTop_toBottomOf="@+id/tv4"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="@id/tv4"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/bottom_car"
+                android:textColor="@color/color3"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupSeat" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnSet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:paddingHorizontal="60dp"
-            android:background="@drawable/bg_gradient_2"
-            android:enabled="true"
-            android:layout_marginBottom="@dimen/margin_main"
-            android:gravity="center"
-            android:paddingVertical="10dp"
-            app:srcCompat="@drawable/ic_selection_querry"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginTop="10dp"
+                android:id="@+id/chipBottom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:singleSelection="true"
+                app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_main"
+                android:text="@string/price_lever"
+                android:textColor="@color/color3"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipBottom" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtPrice"
+                app:layout_constraintTop_toBottomOf="@+id/tv5"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tv5"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:paddingHorizontal="60dp"
+        android:background="@drawable/bg_gradient_2"
+        android:enabled="true"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_main"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        app:srcCompat="@drawable/ic_selection_querry"
+        android:textColor="@color/white" />
+</RelativeLayout>
