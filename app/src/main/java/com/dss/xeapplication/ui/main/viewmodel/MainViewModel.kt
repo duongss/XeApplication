@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 import javax.inject.Inject
 
 interface CarIf {
@@ -235,7 +236,7 @@ class MainViewModel @Inject constructor(
     }
 
     val listConvenient = listOf(R.string.low,R.string.medium,R.string.high)
-    val listTypeFuel = listOf(R.string.oil_or_gas,R.string.electric,R.string.hybrid)
+    val listTypeFuel = listOf(R.string.oil_or_gas, R.string.electric)
     val listBottomType = listOf(R.string.bottom_high,R.string.bottom_low)
     val listSeat = FirebaseStorage.listCar.map { it.numOfSeats }.toSet().sortedDescending()
     var listResultSelection = MutableStateFlow(arrayListOf<Car>())
@@ -262,17 +263,20 @@ class MainViewModel @Inject constructor(
                     return@forEach
                 }
             }
-            if (it.fuelType.contains(checkedChipFuel)) {
+            if (checkedChipFuel.isNotEmpty() && checkedChipFuel.split(" ").none { c ->
+                    c.lowercase(Locale.getDefault())
+                        .contains(it.fuelType.lowercase(Locale.getDefault()))
+                }) {
                 return@forEach
             }
-            if (checkedChipSeat != it.numOfSeats) {
+            if (checkedChipSeat != it.numOfSeats && checkedChipSeat > 0) {
                 return@forEach
             }
-            if (checkedChipBottom == context.getString(R.string.bottom_high) && it.undercarriageDistance < 200) {
+            if (checkedChipBottom.isNotEmpty() && checkedChipBottom == context.getString(R.string.bottom_high) && it.undercarriageDistance < 180) {
                 return@forEach
             }
 
-            if (checkedChipConvenient != context.getString(it.getConvenient())) {
+            if (checkedChipConvenient.isNotEmpty() && checkedChipConvenient != context.getString(it.getConvenient())) {
                 return@forEach
             }
 

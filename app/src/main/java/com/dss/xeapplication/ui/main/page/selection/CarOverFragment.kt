@@ -4,12 +4,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
+import com.dss.xeapplication.base.ads.inter.InterstitialManager
+import com.dss.xeapplication.base.ads.inter.OnCompletedListener
+import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.removeSelf
 import com.dss.xeapplication.base.extension.visible
 import com.dss.xeapplication.databinding.FragmentCarOverBinding
 import com.dss.xeapplication.model.Car
 import com.dss.xeapplication.ui.adapter.AdapterCar
+import com.dss.xeapplication.ui.detailcar.DetailCarFragment
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +39,13 @@ class CarOverFragment : BaseFragment<FragmentCarOverBinding>() {
 
         adapter =
             AdapterCar(
-                onItemSelect = { car: Car, i: Int -> },
+                onItemSelect = { car: Car, i: Int ->
+                    InterstitialManager.show(requireActivity(), object : OnCompletedListener {
+                        override fun onCompleted() {
+                            addFragment(DetailCarFragment.newInstance(car))
+                        }
+                    })
+                },
                 onItemMark = { car: Car, i: Int -> viewModel.updateMark(car) })
         binding.rcvCar.adapter = adapter
     }

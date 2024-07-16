@@ -10,4 +10,7 @@
     <dimen name="area_size_default">56dp</dimen>
     <dimen name="width_image_compare">100dp</dimen>
     <dimen name="height_image_compare">90dp</dimen>
+    <dimen name="top_in_selection">4dp</dimen>
+    <dimen name="margin_top_fee">0dp</dimen>
+    <dimen name="height_media_ads">300dp</dimen>
 </resources>

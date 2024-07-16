@@ -5,12 +5,11 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
-import com.dss.xeapplication.base.ads.GoogleMobileAdsConsentManager
-import com.dss.xeapplication.base.network.INetworkManager
-import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import com.dss.xeapplication.base.local.bus.Event
+import com.dss.xeapplication.base.network.INetworkManager
 import com.dss.xeapplication.data.room.AppDao
 import com.google.firebase.FirebaseApp
+import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import dagger.hilt.android.HiltAndroidApp
 import org.greenrobot.eventbus.EventBus
 import java.util.Locale
@@ -18,10 +17,6 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class App : Application(), INetworkManager {
-
-    var isShowOpenAds = true
-
-    var TfLiteEnable = false
 
     companion object {
 

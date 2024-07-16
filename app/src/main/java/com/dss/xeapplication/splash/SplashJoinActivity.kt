@@ -3,18 +3,18 @@ package com.dss.xeapplication.splash
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import com.bumptech.glide.Glide
 import com.dss.xeapplication.MainActivity
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseActivity
-import com.dss.xeapplication.base.ads.GoogleMobileAdsConsentManager
+import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.base.extension.toastMsg
 import com.dss.xeapplication.base.network.NetworkHelper
 import com.dss.xeapplication.data.FirebaseStorage
 import com.dss.xeapplication.databinding.ActivityLaunchBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
@@ -92,7 +92,9 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
         }else{
             toastMsg(R.string.no_internet)
         }
-
+        CoroutineScope(Dispatchers.IO).launch {
+            NativeManager.load()
+        }
 //        Glide.with(this).load("file:///android_asset/launcher_splash.png").into(binding.iconSplash)
 
     }

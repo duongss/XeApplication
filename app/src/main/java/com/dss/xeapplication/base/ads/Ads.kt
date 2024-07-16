@@ -32,7 +32,7 @@ object Ads {
         get() = if (BuildConfig.DEBUG) reward_test_id else "ca-app-pub-5600863247121843/3912496056"
 
     val nativeId: String
-        get() = if (BuildConfig.DEBUG) native_test_id else "ca-app-pub-5600863247121843/5350550862"
+        get() = if (BuildConfig.DEBUG) native_test_id else "ca-app-pub-6764133072003430/4350621897"
 
     val openId: String
         get() = if (BuildConfig.DEBUG) open_test_id else "ca-app-pub-5600863247121843/9700859410"

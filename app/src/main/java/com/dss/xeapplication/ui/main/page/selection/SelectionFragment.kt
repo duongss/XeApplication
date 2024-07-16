@@ -1,5 +1,7 @@
 package com.dss.xeapplication.ui.main.page.selection
 
+import android.content.res.ColorStateList
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
@@ -8,6 +10,7 @@ import com.dss.xeapplication.base.ads.inter.OnCompletedListener
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
+import com.dss.xeapplication.base.extension.toastMsg
 import com.dss.xeapplication.databinding.ChipfilterBinding
 import com.dss.xeapplication.databinding.FragmentSelectionBinding
 import com.dss.xeapplication.ui.main.viewmodel.MainViewModel
@@ -66,6 +69,8 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
             text = str
             isCloseIconVisible = false
             isCheckedIconVisible = true
+            checkedIconTint =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.color3))
         }
         return chip
     }
@@ -73,20 +78,29 @@ class SelectionFragment : BaseFragment<FragmentSelectionBinding>() {
     override fun initListener() {
         binding.btnSet.onAvoidDoubleClick {
             val selectedConvenient =
-                binding.chipGroupConvenient.findViewById<Chip>(binding.chipGroupConvenient.checkedChipId).text.toString()
+                binding.chipGroupConvenient.findViewById<Chip>(binding.chipGroupConvenient.checkedChipId)?.text?.toString()
             val selectedFuel =
-                binding.chipGroupFuel.findViewById<Chip>(binding.chipGroupFuel.checkedChipId).text.toString()
+                binding.chipGroupFuel.findViewById<Chip>(binding.chipGroupFuel.checkedChipId)?.text?.toString()
             val selectedSeat =
-                binding.chipGroupSeat.findViewById<Chip>(binding.chipGroupSeat.checkedChipId).text.toString()
-                    .toInt()
+                binding.chipGroupSeat.findViewById<Chip>(binding.chipGroupSeat.checkedChipId)?.text?.toString()
+            var seat = 0
+            if (!selectedSeat.isNullOrEmpty()) {
+                seat = selectedSeat.toInt()
+            }
             val selectedBottom =
-                binding.chipBottom.findViewById<Chip>(binding.chipBottom.checkedChipId).text.toString()
+                binding.chipBottom.findViewById<Chip>(binding.chipBottom.checkedChipId)?.text?.toString()
+
+            if (selectedConvenient.isNullOrEmpty() && selectedFuel.isNullOrEmpty() && seat == 0 && selectedBottom.isNullOrEmpty() && binding.edtPrice.text.isNullOrEmpty()) {
+                toastMsg(R.string.no_data_suit)
+                return@onAvoidDoubleClick
+            }
+
             viewModel.thinkData(
                 requireContext(),
-                selectedConvenient,
-                selectedFuel,
-                selectedSeat,
-                selectedBottom,
+                selectedConvenient ?: "",
+                selectedFuel ?: "",
+                seat,
+                selectedBottom ?: "",
                 binding.edtPrice.text.toString(),
             )
             InterstitialManager.show(requireActivity(), object : OnCompletedListener {

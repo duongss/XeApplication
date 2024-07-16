@@ -4,6 +4,7 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.ListPopupWindow
 import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
+import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.onAvoidDoubleClick
 import com.dss.xeapplication.base.extension.removeSelf
@@ -32,11 +33,17 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
         binding.toolbar.btnBack.gone()
         val adapter = FeeAdapter(requireContext(), LocationFee.listLocationFee) { it, pos ->
             handleFee(it, pos)
-
         }
 
         binding.spinnerLocation.adapter = adapter
         handleFee(LocationFee.listLocationFee[0], 0)
+
+        NativeManager.bindNativeAds(
+            this,
+            binding.layoutAds,
+            R.layout.native_ads_template
+        )
+
     }
 
     private fun handleFee(it: CarFee, pos: Int) {
@@ -49,7 +56,7 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
         binding.tvUnit.text = it.unitPrice
 
         val sum =
-            it.registration + it.registrationCertificate + it.licensePlate + it.civilLiabilityInsurance + it.registration + it.roadMaintenance
+            it.registration + it.licensePlate + it.registrationCertificate + it.roadMaintenance + it.civilLiabilityInsurance
         binding.tvSum.text =
             getString(R.string.price_sum, sum.toCurrencyFormat())
         binding.spinnerLocation.setSelection(pos)
@@ -59,6 +66,10 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
     override fun initListener() {
         binding.btnDone.onAvoidDoubleClick {
             removeSelf()
+        }
+
+        binding.lnSpinner.onAvoidDoubleClick {
+            binding.spinnerLocation.performClick()
         }
     }
 
