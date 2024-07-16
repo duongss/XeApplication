@@ -3,6 +3,7 @@ package com.dss.xeapplication.model
 import android.os.Parcelable
 import com.dss.xeapplication.R
 import kotlinx.parcelize.Parcelize
+import java.util.Locale
 
 @Parcelize
 data class Car(
@@ -43,6 +44,25 @@ data class Car(
     var isMark :Boolean = false,
     var isSelected :Boolean = false
 ) : Parcelable {
+    fun getConvenient(): Int {
+        val l = listOf(BSW, RCTA, LCDN, ABS, VRS, WPCS)
+
+        val countTrue = l.count { it }
+
+        return when {
+            countTrue >= 5 -> {
+                R.string.high
+            }
+
+            countTrue >= 3 -> {
+                R.string.medium
+            }
+
+            else -> {
+                R.string.low
+            }
+        }
+    }
 
 }
 
@@ -102,4 +122,32 @@ fun Car.nameWithModel(): String {
         append(" ")
         append(model)
     }
+}
+
+
+fun String.toPrice(): Float {
+    var r = 0f
+    var r1 = 0f
+    val str = this.trim().toLowerCase(Locale.ROOT)
+
+    try {
+
+        if (this.isEmpty()) {
+            return 0f
+        }
+
+        if (str.contains("tỉ")) {
+            val x = split("tỉ")[0]
+            r = x.toFloat() * 1000000000
+        }
+
+        if (str.contains("triệu")) {
+            val x = split("triệu")[0]
+            r1 = x.toFloat() * 1000000
+        }
+    } catch (e: Exception) {
+
+    }
+
+    return r + r1
 }

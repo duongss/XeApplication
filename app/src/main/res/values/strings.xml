@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DCar</string>
+    <string name="app_name">Lựa Xe</string>
     <string name="processing">Processing</string>
 
     <string name="description_share_app">I\'m using the %s ! Try it now! %s</string>
@@ -88,6 +88,7 @@
     <string name="notification">Thông báo</string>
     <string name="danh_sach_xe">Danh sách</string>
     <string name="no_data">Không có dữ liệu</string>
+    <string name="no_data_suit">Không có kết quả phù hợp</string>
     <string name="data_with_tax">Dự tính chi phí phụ</string>
     <string name="done">Xong</string>
 
@@ -114,4 +115,5 @@
     <string name="bottom_high">Gầm cao</string>
     <string name="bottom_low">Gầm thấp</string>
     <string name="convenient">Tiện nghi</string>
+    <string name="car_suitable">Xe phù hợp</string>
 </resources>

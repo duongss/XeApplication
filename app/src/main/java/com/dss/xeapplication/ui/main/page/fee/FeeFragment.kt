@@ -57,10 +57,6 @@ class FeeFragment : BaseFragment<FragmentFeeBinding>() {
     }
 
     override fun initListener() {
-        backListener(binding.toolbar.btnBack) {
-            removeSelf()
-        }
-
         binding.btnDone.onAvoidDoubleClick {
             removeSelf()
         }

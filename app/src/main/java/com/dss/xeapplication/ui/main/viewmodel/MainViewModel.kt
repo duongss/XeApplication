@@ -1,5 +1,6 @@
 package com.dss.xeapplication.ui.main.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -12,9 +13,11 @@ import com.dss.xeapplication.model.CompareCarData
 import com.dss.xeapplication.model.SpecificationsCar
 import com.dss.xeapplication.model.SpecificationsCompareCar
 import com.dss.xeapplication.model.createListSpecifications
+import com.dss.xeapplication.model.toPrice
 import com.dss.xeapplication.ui.main.MainFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -235,18 +238,46 @@ class MainViewModel @Inject constructor(
     val listTypeFuel = listOf(R.string.oil_or_gas,R.string.electric,R.string.hybrid)
     val listBottomType = listOf(R.string.bottom_high,R.string.bottom_low)
     val listSeat = FirebaseStorage.listCar.map { it.numOfSeats }.toSet().sortedDescending()
+    var listResultSelection = MutableStateFlow(arrayListOf<Car>())
+
     fun thinkData(
-        checkedChipConvenient: Int,
-        checkedChipFuel: Int,
+        context: Context,
+        checkedChipConvenient: String,
+        checkedChipFuel: String,
         checkedChipSeat: Int,
-        checkedChipBottom: Int,
+        checkedChipBottom: String,
         price: String
     ) = viewModelScope.launch(Dispatchers.IO) {
-         val resultConvenient = listConvenient[checkedChipConvenient]
-         val resultFuel = listTypeFuel[checkedChipFuel]
-         val resultBottom = listBottomType[checkedChipBottom]
-         val resultSeat = listSeat[checkedChipSeat]
+        val priceE = price.toPrice()
 
+        val listResult = arrayListOf<Car>()
 
+        val pairRangePrice = Pair(priceE - 100000000, priceE + 100000000)
+        FirebaseStorage.listCar.forEach {
+            if (priceE != 0f) {
+                if (it.currentPrice.toPrice() < pairRangePrice.first) {
+                    return@forEach
+                }
+                if (it.currentPrice.toPrice() > pairRangePrice.second) {
+                    return@forEach
+                }
+            }
+            if (it.fuelType.contains(checkedChipFuel)) {
+                return@forEach
+            }
+            if (checkedChipSeat != it.numOfSeats) {
+                return@forEach
+            }
+            if (checkedChipBottom == context.getString(R.string.bottom_high) && it.undercarriageDistance < 200) {
+                return@forEach
+            }
+
+            if (checkedChipConvenient != context.getString(it.getConvenient())) {
+                return@forEach
+            }
+
+            listResult.add(it)
+        }
+        listResultSelection.value = listResult
     }
 }
