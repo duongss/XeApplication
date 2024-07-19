@@ -40,6 +40,9 @@ data class Car(
     var airConditionType : String= "", // điều hòa
     var chairMaterial : String= "",
     var imageCar :String =  "",
+    // new update
+    var numberSpeakers: String = "", // loa
+    var entertainmentScreen: String = "", // Màn hình giải trí
 
     var isMark :Boolean = false,
     var isSelected :Boolean = false
@@ -89,31 +92,120 @@ fun Car.getStrVehicleType(): String? {
 }
 
 fun Car.createListSpecifications(): ArrayList<SpecificationsCar> {
-    return  arrayListOf(
-        SpecificationsCar(R.string.engineType,engineType),
-        SpecificationsCar(R.string.transmissionType,transmissionType),
-        SpecificationsCar(R.string.fuelType,fuelType),
-        SpecificationsCar(R.string.headlights,headlights),
-        SpecificationsCar(R.string.HT,HT),
-        SpecificationsCar(R.string.brake,brake),
-        SpecificationsCar(R.string.airConditionType,airConditionType),
-        SpecificationsCar(R.string.chairMaterial,chairMaterial),
+    val list = arrayListOf<SpecificationsCar>()
 
-        SpecificationsCar(R.string.numOfDoors, contentInt = numOfDoors, type = SpecificationsCar.TYPE_CONTENT_INT),
-        SpecificationsCar(R.string.numOfSeats, contentInt = numOfSeats, type = SpecificationsCar.TYPE_CONTENT_INT),
-        SpecificationsCar(R.string.length, contentInt = length, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
-        SpecificationsCar(R.string.width, contentInt = width, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
-        SpecificationsCar(R.string.height, contentInt = height, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
-        SpecificationsCar(R.string.undercarriageDistance, contentInt = undercarriageDistance, unit = "mm", type = SpecificationsCar.TYPE_CONTENT_INT),
-        SpecificationsCar(R.string.airBag, contentInt = airBag, type = SpecificationsCar.TYPE_CONTENT_INT),
+    list.add(SpecificationsCar(R.string.engineType, engineType))
+    list.add(SpecificationsCar(R.string.transmissionType, transmissionType))
+    list.add(SpecificationsCar(R.string.fuelType, fuelType))
+    list.add(SpecificationsCar(R.string.headlights, headlights))
+    if (!HT.isNullOrEmpty())
+        list.add(SpecificationsCar(R.string.HT, HT))
+    list.add(SpecificationsCar(R.string.brake, brake))
+    list.add(SpecificationsCar(R.string.airConditionType, airConditionType))
+    list.add(SpecificationsCar(R.string.chairMaterial, chairMaterial))
+    if (!numberSpeakers.isNullOrEmpty())
+        list.add(SpecificationsCar(R.string.speakers_system, numberSpeakers))
+    if (!entertainmentScreen.isNullOrEmpty())
+        list.add(SpecificationsCar(R.string.entertainmentScreen, entertainmentScreen))
 
-        SpecificationsCar(R.string.BSW, contentBoolean = BSW, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
-        SpecificationsCar(R.string.RCTA, contentBoolean = RCTA, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
-        SpecificationsCar(R.string.LCDN, contentBoolean = LCDN, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
-        SpecificationsCar(R.string.ABS, contentBoolean = ABS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
-        SpecificationsCar(R.string.VRS, contentBoolean = VRS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
-        SpecificationsCar(R.string.WPCS, contentBoolean = WPCS, type = SpecificationsCar.TYPE_CONTENT_BOOLEAN),
+    list.add(
+        SpecificationsCar(
+            R.string.numOfDoors,
+            contentInt = numOfDoors,
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
     )
+    list.add(
+        SpecificationsCar(
+            R.string.numOfSeats,
+            contentInt = numOfSeats,
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.length,
+            contentInt = length,
+            unit = "mm",
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.width,
+            contentInt = width,
+            unit = "mm",
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.height,
+            contentInt = height,
+            unit = "mm",
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.undercarriageDistance,
+            contentInt = undercarriageDistance,
+            unit = "mm",
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.airBag,
+            contentInt = airBag,
+            type = SpecificationsCar.TYPE_CONTENT_INT
+        )
+    )
+
+    list.add(
+        SpecificationsCar(
+            R.string.BSW,
+            contentBoolean = BSW,
+            type = SpecificationsCar.TYPE_CONTENT_BOOLEAN
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.RCTA,
+            contentBoolean = RCTA,
+            type = SpecificationsCar.TYPE_CONTENT_BOOLEAN
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.LCDN,
+            contentBoolean = LCDN,
+            type = SpecificationsCar.TYPE_CONTENT_BOOLEAN
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.ABS,
+            contentBoolean = ABS,
+            type = SpecificationsCar.TYPE_CONTENT_BOOLEAN
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.VRS,
+            contentBoolean = VRS,
+            type = SpecificationsCar.TYPE_CONTENT_BOOLEAN
+        )
+    )
+    list.add(
+        SpecificationsCar(
+            R.string.WPCS,
+            contentBoolean = WPCS,
+            type = SpecificationsCar.TYPE_CONTENT_BOOLEAN
+        )
+    )
+
+    return list
 }
 
 fun Car.nameWithModel(): String {

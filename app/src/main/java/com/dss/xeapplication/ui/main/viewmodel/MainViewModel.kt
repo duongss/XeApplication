@@ -252,6 +252,7 @@ class MainViewModel @Inject constructor(
         val priceE = price.toPrice()
 
         val listResult = arrayListOf<Car>()
+        val lastListResult = arrayListOf<Car>()
 
         val pairRangePrice = Pair(priceE - 100000000, priceE + 100000000)
         FirebaseStorage.listCar.forEach {
@@ -269,9 +270,7 @@ class MainViewModel @Inject constructor(
                 }) {
                 return@forEach
             }
-            if (checkedChipSeat != it.numOfSeats && checkedChipSeat > 0) {
-                return@forEach
-            }
+
             if (checkedChipBottom.isNotEmpty() && checkedChipBottom == context.getString(R.string.bottom_high) && it.undercarriageDistance < 180) {
                 return@forEach
             }
@@ -282,6 +281,20 @@ class MainViewModel @Inject constructor(
 
             listResult.add(it)
         }
-        listResultSelection.value = listResult
+
+        if (listResult.isNotEmpty()) {
+            listResult.forEach {
+                if (checkedChipSeat != it.numOfSeats && checkedChipSeat > 0) {
+                    return@forEach
+                }
+                lastListResult.add(it)
+            }
+        }
+
+        if (lastListResult.isEmpty()) {
+            lastListResult.addAll(listResult)
+        }
+
+        listResultSelection.value = lastListResult
     }
 }

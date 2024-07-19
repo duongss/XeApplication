@@ -116,4 +116,6 @@
     <string name="bottom_low">Gầm thấp</string>
     <string name="convenient">Tiện nghi</string>
     <string name="car_suitable">Xe phù hợp</string>
+    <string name="speakers_system">Hệ thống loa</string>
+    <string name="entertainmentScreen">Màn hình giải trí</string>
 </resources>
