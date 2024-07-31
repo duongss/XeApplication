@@ -2,10 +2,10 @@ package com.dss.xeapplication.base.ads.nativeads
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.dss.xeapplication.App
@@ -80,6 +80,35 @@ object NativeManager {
         }
     }
 
+    fun getNativeAds(
+        activity: FragmentActivity,
+        layoutNative: Int,
+        numberAds: Int = 1,
+        keyAd: String = activity.javaClass.simpleName
+    ): List<NativeAdView>? {
+
+        if (SharedPref.isVip || activity.isDestroyed || activity.isFinishing || activity.isChangingConfigurations) {
+            return null
+        }
+
+        val listResult = mutableListOf<NativeAdView>()
+        repeat(numberAds) {
+            storageAds.getAds()?.let {
+                if (hashMapAds.containsKey(keyAd)) {
+                    hashMapAds[keyAd]?.add(it)
+                } else {
+                    hashMapAds[keyAd] = mutableListOf(it)
+                }
+
+                val adView = activity.layoutInflater.inflate(layoutNative, null) as NativeAdView
+                it.nativeAd?.let { d ->
+                    listResult.add(populateNativeAdView(d, adView))
+                }
+            }
+        }
+        return listResult
+    }
+
     fun clear(nameClass: String) {
         synchronized(nameClass) {
             hashMapAds[nameClass]?.forEach {
@@ -93,7 +122,7 @@ object NativeManager {
     private fun populateNativeAdView(
         nativeAd: NativeAd,
         adView: NativeAdView
-    ) {
+    ): NativeAdView {
         // Set the media view.
         adView.mediaView = adView.findViewById(R.id.ad_media)
 
@@ -113,75 +142,107 @@ object NativeManager {
             adView.mediaView?.setMediaContent(it)
         }
 
-        // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
-        // check before trying to display them.
-        if (nativeAd.body == null) {
+        try {
+            if (nativeAd.body == null) {
+                adView.bodyView?.visibility = View.INVISIBLE
+            } else {
+                adView.bodyView?.visibility = View.VISIBLE
+                adView.bodyView?.let {
+                    (it as TextView).text = nativeAd.body
+                }
+            }
+        } catch (e: Exception) {
             adView.bodyView?.visibility = View.INVISIBLE
-        } else {
-            adView.bodyView?.visibility = View.VISIBLE
-            adView.bodyView?.let {
-                (it as TextView).text = nativeAd.body
-            }
         }
 
-        if (nativeAd.price == null) {
+        try {
+            if (nativeAd.price == null) {
+                adView.priceView?.visibility = View.INVISIBLE
+            } else {
+                adView.priceView?.visibility = View.VISIBLE
+                adView.priceView?.let {
+                    (it as TextView).text = nativeAd.price
+                }
+            }
+        } catch (e: Exception) {
             adView.priceView?.visibility = View.INVISIBLE
-        } else {
-            adView.priceView?.visibility = View.VISIBLE
-            adView.priceView?.let {
-                (it as TextView).text = nativeAd.price
-            }
         }
 
-        if (nativeAd.store == null) {
-            adView.storeView?.visibility = View.INVISIBLE
-        } else {
-            adView.storeView?.visibility = View.VISIBLE
-            adView.storeView?.let {
-                (it as TextView).text = nativeAd.store
+        try {
+            if (nativeAd.store == null) {
+                adView.storeView?.visibility = View.GONE
+            } else {
+                adView.storeView?.visibility = View.VISIBLE
+                adView.storeView?.let {
+                    (it as TextView).text = nativeAd.store
+                }
             }
+        } catch (e: Exception) {
+            adView.storeView?.visibility = View.GONE
         }
-        if (nativeAd.advertiser == null) {
+
+
+        try {
+            (adView.headlineView as TextView).text = nativeAd.headline
+        } catch (e: Exception) {
+            adView.headlineView?.visibility = View.GONE
+        }
+
+        try {
+            if (nativeAd.advertiser == null) {
+                adView.advertiserView?.visibility = View.INVISIBLE
+            } else {
+                adView.advertiserView?.visibility = View.VISIBLE
+                adView.storeView?.let {
+                    (it as TextView).text = nativeAd.advertiser
+                }
+            }
+        } catch (e: Exception) {
             adView.advertiserView?.visibility = View.INVISIBLE
-        } else {
-            adView.advertiserView?.visibility = View.VISIBLE
-            adView.storeView?.let {
-                (it as TextView).text = nativeAd.advertiser
-            }
         }
-        // This method tells the Google Mobile Ads SDK that you have finished populating your
-        // native ad view with this native ad.
 
-        (adView.headlineView as TextView).text = nativeAd.headline
-
-        if (nativeAd.starRating == null) {
+        try {
+            if (nativeAd.starRating == null) {
+                adView.starRatingView?.visibility = View.INVISIBLE
+            } else {
+                (adView.starRatingView as RatingBar).rating = nativeAd.starRating!!.toFloat()
+                adView.starRatingView?.visibility = View.VISIBLE
+            }
+        } catch (e: Exception) {
             adView.starRatingView?.visibility = View.INVISIBLE
-        } else {
-            (adView.starRatingView as RatingBar).rating = nativeAd.starRating!!.toFloat()
-            adView.starRatingView?.visibility = View.VISIBLE
         }
 
-        if (nativeAd.icon == null) {
+        try {
+            if (nativeAd.icon == null) {
+                adView.iconView?.visibility = View.GONE
+            } else {
+                adView.iconView?.let {
+                    (it as ImageView).setImageDrawable(
+                        nativeAd.icon?.drawable
+                    )
+                    it.visibility = View.VISIBLE
+                }
+            }
+        } catch (e: Exception) {
             adView.iconView?.visibility = View.GONE
-        } else {
-            adView.iconView?.let {
-                (it as ImageView).setImageDrawable(
-                    nativeAd.icon?.drawable
-                )
-                it.visibility = View.VISIBLE
-            }
         }
 
-        if (nativeAd.callToAction == null) {
-            adView.callToActionView?.visibility = View.INVISIBLE
-        } else {
-            adView.callToActionView?.let {
-                it.visibility = View.VISIBLE
-                (it as Button).text = nativeAd.callToAction
+        try {
+            if (nativeAd.callToAction == null) {
+                adView.callToActionView?.visibility = View.INVISIBLE
+            } else {
+                adView.callToActionView?.let {
+                    it.visibility = View.VISIBLE
+                    (it as AppCompatTextView).text = nativeAd.callToAction
+                }
             }
+
+        } catch (e: Exception) {
+            adView.callToActionView?.visibility = View.INVISIBLE
         }
 
         adView.setNativeAd(nativeAd)
+        return adView
     }
 
 }
@@ -189,7 +250,7 @@ object NativeManager {
 class StorageAds {
     private val storageStack = ArrayDeque<NativeAdState>()
 
-    private val limitLoad = 1
+    private val limitLoad = 3
     private var builder: AdLoader.Builder? = null
     private var data: NativeAdState? = null
 

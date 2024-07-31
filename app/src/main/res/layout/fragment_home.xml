@@ -66,15 +66,17 @@
             app:layout_constraintStart_toStartOf="@+id/tvLocation"
             app:layout_constraintTop_toTopOf="@+id/btnCompare" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/btnCompare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="22dp"
+            app:lottie_loop="true"
+            android:background="@drawable/bg_gradient_3"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="@+id/ivNotification"
-            app:layout_constraintTop_toBottomOf="@+id/tvLocation"
-            app:srcCompat="@drawable/ic_filter" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

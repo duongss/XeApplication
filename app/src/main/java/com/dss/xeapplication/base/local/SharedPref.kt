@@ -238,20 +238,10 @@ object SharedPref {
             editor.putLong(MAX_TIME_GAP_KEY, value).apply()
         }
 
-    fun resetViewFileCount() {
-        getSharedPreferences().setLong(VIEW_FILE_COUNT, 0)
-    }
-
     var timeViewOpen: Long
         get() = getSharedPreferences().getLong(TIME_VIEW_FILE, 0L)
         set(value) {
             getSharedPreferences().setLong(TIME_VIEW_FILE, value)
-        }
-
-    var fileNewConvert: Boolean
-        get() = getSharedPreferences().getBoolean(FILE_CONVERT_NEW, false)
-        set(value) {
-            getSharedPreferences().setBoolean(FILE_CONVERT_NEW, value)
         }
 
     var sorterLocal: Sorter

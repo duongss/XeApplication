@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:background="@color/black_transparent_5"
+        android:background="@color/color7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -83,6 +83,7 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
+                android:paddingVertical="8dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -128,12 +129,20 @@
                         android:paddingRight="5dp"
                         android:textSize="12sp" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/ad_call_to_action"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="4dp"
+                        android:paddingHorizontal="24dp"
+                        android:background="@drawable/bg_gradient_1"
+                        android:enabled="true"
                         android:gravity="center"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:paddingVertical="10dp"
+                        android:text="@string/install"
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>

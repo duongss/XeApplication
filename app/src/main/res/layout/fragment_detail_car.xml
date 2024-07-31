@@ -82,6 +82,13 @@
                 app:layout_constraintTop_toTopOf="@+id/tvName"
                 app:srcCompat="@drawable/ac_bookmark" />
 
+            <FrameLayout
+                android:layout_marginTop="4dp"
+                android:id="@+id/layoutAds"
+                app:layout_constraintTop_toBottomOf="@+id/tvBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieGear"
                 android:layout_width="40dp"
@@ -92,7 +99,7 @@
                 android:background="?selectableItemBackground"
                 android:scaleType="centerInside"
                 app:layout_constraintStart_toStartOf="@+id/tvBrand"
-                app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
+                app:layout_constraintTop_toBottomOf="@+id/layoutAds" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvData"
@@ -116,4 +123,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
+
 </FrameLayout>

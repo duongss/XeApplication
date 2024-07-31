@@ -122,7 +122,7 @@
                     android:layout_width="@dimen/width_image_compare"
                     android:layout_height="@dimen/height_image_compare"
                     android:layout_marginTop="10dp"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvNameCar1" />
 
@@ -130,7 +130,7 @@
                     android:id="@+id/ivCarAfter"
                     android:layout_width="@dimen/width_image_compare"
                     android:layout_height="@dimen/height_image_compare"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     app:layout_constraintBottom_toBottomOf="@+id/ivCarBefore"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/ivCarBefore" />

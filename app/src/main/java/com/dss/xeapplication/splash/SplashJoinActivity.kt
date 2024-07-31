@@ -1,5 +1,8 @@
 package com.dss.xeapplication.splash
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
@@ -92,11 +96,17 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
         }else{
             toastMsg(R.string.no_internet)
         }
+        val colorAnim: ObjectAnimator = ObjectAnimator.ofInt(
+            binding.tvContent, "textColor",
+            Color.WHITE, Color.BLACK
+        )
+        colorAnim.setDuration(1500)
+        colorAnim.setEvaluator(ArgbEvaluator())
+        colorAnim.start()
+
         CoroutineScope(Dispatchers.IO).launch {
             NativeManager.load()
         }
-//        Glide.with(this).load("file:///android_asset/launcher_splash.png").into(binding.iconSplash)
-
     }
 
 

@@ -18,6 +18,10 @@ data class SpecificationsCar(
         const val TYPE_CONTENT_BOOLEAN = 2
 
         const val TYPE_CONTENT_INT = 3
+
+        const val TYPE_ADS = 4
+
+
     }
 
 }

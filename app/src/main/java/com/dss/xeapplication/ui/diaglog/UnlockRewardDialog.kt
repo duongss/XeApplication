@@ -72,7 +72,8 @@ class UnlockRewardDialog : BaseDialogFragment<DialogUnlockRewardBinding>() {
 
                 override fun onLoadFailed() {
                     lifecycleScope.launchWhenResumed {
-                        toastMsg(R.string.error_load_ads)
+                        unlockForFreeListener?.onUnlockedFromUser()
+                        dismiss()
                     }
                 }
             })

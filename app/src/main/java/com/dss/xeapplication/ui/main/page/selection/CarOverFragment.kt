@@ -6,6 +6,7 @@ import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ads.inter.InterstitialManager
 import com.dss.xeapplication.base.ads.inter.OnCompletedListener
+import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.removeSelf
@@ -48,6 +49,9 @@ class CarOverFragment : BaseFragment<FragmentCarOverBinding>() {
                 },
                 onItemMark = { car: Car, i: Int -> viewModel.updateMark(car) })
         binding.rcvCar.adapter = adapter
+
+        NativeManager.getNativeAds(requireActivity(), R.layout.native_ads_template_2, adapter.maxAd)
+            ?.let { adapter.setListNative(it) }
     }
 
     override fun initObserver() {

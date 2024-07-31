@@ -327,7 +327,6 @@
             android:id="@+id/layoutAds"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
-            android:minHeight="@dimen/height_media_ads"
             android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
