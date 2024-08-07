@@ -15,8 +15,8 @@ android {
         applicationId = "com.dss.xeapplication"
         minSdk = 26
         targetSdk = 34
-        versionCode = 13
-        versionName = "2.3"
+        versionCode = 16
+        versionName = "2.6"
 
     }
 
@@ -82,7 +82,7 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
     implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
     implementation ("com.makeramen:roundedimageview:2.3.0")
-    implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation("com.airbnb.android:lottie:6.3.0")
     implementation ("com.guolindev.permissionx:permissionx:1.7.1")
     implementation ("com.google.code.gson:gson:2.10.1")
     implementation ("com.github.ome450901:SimpleRatingBar:1.5.1")

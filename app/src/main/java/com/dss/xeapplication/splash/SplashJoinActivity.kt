@@ -90,6 +90,10 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         if (NetworkHelper.isConnected()){
+            CoroutineScope(Dispatchers.IO).launch {
+                NativeManager.load()
+            }
+
             FirebaseStorage.initData {
 
             }
@@ -104,9 +108,6 @@ class SplashJoinActivity : BaseActivity<ActivityLaunchBinding>() {
         colorAnim.setEvaluator(ArgbEvaluator())
         colorAnim.start()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            NativeManager.load()
-        }
     }
 
 

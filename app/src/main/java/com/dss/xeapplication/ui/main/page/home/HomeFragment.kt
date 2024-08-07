@@ -9,7 +9,6 @@ import com.dss.xeapplication.R
 import com.dss.xeapplication.base.BaseFragment
 import com.dss.xeapplication.base.ads.inter.InterstitialManager
 import com.dss.xeapplication.base.ads.inter.OnCompletedListener
-import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.base.extension.addFragment
 import com.dss.xeapplication.base.extension.gone
 import com.dss.xeapplication.base.extension.invisible
@@ -101,12 +100,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomDialog.Fil
             })
 
 
-        NativeManager.getNativeAds(
-            requireActivity(),
-            R.layout.native_ads_template_2,
-            adapterCar.maxAd
-        )
-            ?.let { adapterCar.setListNative(it) }
+        adapterCar.setupAds(R.layout.native_ads_template_2, javaClass.simpleName)
         binding.rcvCar.adapter = adapterCar
     }
 

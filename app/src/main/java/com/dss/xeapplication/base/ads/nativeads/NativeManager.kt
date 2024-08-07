@@ -1,11 +1,13 @@
 package com.dss.xeapplication.base.ads.nativeads
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.dss.xeapplication.App
@@ -83,15 +85,15 @@ object NativeManager {
     fun getNativeAds(
         activity: FragmentActivity,
         layoutNative: Int,
-        numberAds: Int = 1,
-        keyAd: String = activity.javaClass.simpleName
-    ): List<NativeAdView>? {
+        numberAds: Int,
+        keyAd: String = activity.javaClass.simpleName,
+        adsPositionCallback: (NativeAdView) -> Unit
+    ) {
 
         if (SharedPref.isVip || activity.isDestroyed || activity.isFinishing || activity.isChangingConfigurations) {
-            return null
+            return
         }
 
-        val listResult = mutableListOf<NativeAdView>()
         repeat(numberAds) {
             storageAds.getAds()?.let {
                 if (hashMapAds.containsKey(keyAd)) {
@@ -102,11 +104,41 @@ object NativeManager {
 
                 val adView = activity.layoutInflater.inflate(layoutNative, null) as NativeAdView
                 it.nativeAd?.let { d ->
-                    listResult.add(populateNativeAdView(d, adView))
+                    adsPositionCallback.invoke(populateNativeAdView(d, adView))
                 }
             }
         }
-        return listResult
+    }
+
+
+    fun getNativeAds(
+        context: Context,
+        layoutNative: Int,
+        keyAd: String
+    ): NativeAdView? {
+        if (SharedPref.isVip) {
+            return null
+        }
+
+        val result = storageAds.getAds()?.let {
+
+            if (hashMapAds.containsKey(keyAd)) {
+                hashMapAds[keyAd]?.add(it)
+            } else {
+                hashMapAds[keyAd] = mutableListOf(it)
+            }
+
+            val nativeAdView =
+                LayoutInflater.from(context).inflate(layoutNative, null, false) as NativeAdView
+            it.nativeAd?.let { d ->
+                populateNativeAdView(d, nativeAdView)
+            } ?: kotlin.run {
+                null
+            }
+        } ?: kotlin.run {
+            null
+        }
+        return result
     }
 
     fun clear(nameClass: String) {
@@ -233,7 +265,7 @@ object NativeManager {
             } else {
                 adView.callToActionView?.let {
                     it.visibility = View.VISIBLE
-                    (it as AppCompatTextView).text = nativeAd.callToAction
+                    (it as Button).text = nativeAd.callToAction
                 }
             }
 
@@ -323,6 +355,6 @@ enum class State {
 }
 
 enum class Type {
-    FIXED,
+    FIXED, // Quảng cáo không bị làm mới,luôn có sẵn
     DYNAMIC
 }

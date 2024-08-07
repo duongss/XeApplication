@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.databinding.ItemAdsBinding
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.wavez.p27_pdf_scanner.data.local.SharedPref
@@ -22,7 +23,7 @@ abstract class BaseRecyclerViewAdsAdapter<T, V : ViewBinding>(
         const val TYPE_ADS = 1
     }
 
-    open val maxAd = 3
+    open val maxAd = 6
 
     open val spaceAd = 8
 
@@ -79,11 +80,52 @@ abstract class BaseRecyclerViewAdsAdapter<T, V : ViewBinding>(
         } else {
             val binding = (holder as BaseRecyclerViewAdsAdapter<*, V>.AdsViewHolder).binding
             val data = dataList[position]
-            val order = data.type.ordinal
+            val indexAds = data.type?.i ?: 0
+            val context = holder.itemView.context
 
-            val nativeAdView = listNative[order]
-            binding.root.removeAllViews()
-            binding.root.addView(nativeAdView)
+            if (listNative.isEmpty()) {
+                bindAds(context, binding)
+                return
+            }
+
+            if (listNative.size == maxAd) {
+                bindAds(context, binding, listNative[indexAds])
+            } else {
+                bindAds(context, binding)
+            }
+        }
+    }
+
+    var nameScreen = ""
+
+    fun setupAds(layout: Int, nameScreen: String) {
+        layoutAds = layout
+        this.nameScreen = nameScreen
+    }
+
+    private var layoutAds: Int? = null
+
+    private fun bindAds(
+        context: Context,
+        binding: ItemAdsBinding,
+        nativeAdView: NativeAdView? = null
+    ) {
+        layoutAds?.let {
+            val ads = nativeAdView ?: NativeManager.getNativeAds(context, it, nameScreen)
+            if (ads != null) {
+                // Kiểm tra nếu ads đã có parent, loại bỏ nó khỏi parent trước
+                ads.parent?.let { parent ->
+                    (parent as ViewGroup).removeView(ads)
+                }
+                binding.root.removeAllViews()
+                if (binding.root.parent != null) {
+                    (binding.root.parent as ViewGroup).removeView(binding.root)
+                }
+                binding.root.addView(ads)
+                if (nativeAdView == null) {
+                    listNative.add(ads)
+                }
+            }
         }
     }
 
@@ -104,20 +146,21 @@ abstract class BaseRecyclerViewAdsAdapter<T, V : ViewBinding>(
             listData.add(WrapData(t))
         }
 
-        if (!this.notShowAds && listData.isNotEmpty() && listNative.isNotEmpty()) {
+        if (!this.notShowAds && listData.isNotEmpty()) {
             listPositionAds = getPositionAds(dataList.size)
 
             // thiết lập cho quảng cáo xuất hiện xen kẽ
             listPositionAds.forEachIndexed { index, i ->
                 if (index % 2 == 0) {
                     if (i + spanCount <= listData.size) {
-                        listData.add(i + spanCount, WrapData(type = WrapData.Type.FIRST))
+                        listData.add(i + spanCount, WrapData(type = AdsType(index)))
                     }
                 } else {
-                    listData.add(i, WrapData(type = WrapData.Type.TWO))
+                    listData.add(i, WrapData(type = AdsType(index)))
                 }
             }
         }
+
 
         this.dataList.clear()
         this.dataList.addAll(listData)

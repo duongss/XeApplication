@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.base.component.DialogLoading
-import com.wavez.p27_pdf_scanner.data.local.SharedPref
 import org.greenrobot.eventbus.EventBus
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
@@ -43,6 +43,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     override fun onDestroyView() {
         release()
+        NativeManager.clear(javaClass.simpleName)
         dialogLoading.dismissDialog()
         if (hasEventBus) EventBus.getDefault().unregister(this)
         super.onDestroyView()

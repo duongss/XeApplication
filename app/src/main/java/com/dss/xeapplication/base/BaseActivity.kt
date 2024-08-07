@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.dss.xeapplication.App
 import com.dss.xeapplication.base.ads.inter.InterstitialManager
+import com.dss.xeapplication.base.ads.nativeads.NativeManager
 import com.dss.xeapplication.base.component.ContextUtils
 import com.dss.xeapplication.base.component.DialogLoading
 import org.greenrobot.eventbus.EventBus
@@ -50,6 +51,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
 
     override fun onDestroy() {
+        NativeManager.clear(javaClass.simpleName)
         if (hasEventBus) EventBus.getDefault().unregister(this)
         release()
         dialogLoading.dismissDialog()
